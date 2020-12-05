@@ -1,0 +1,21 @@
+{
+  "name": "with-svelte",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "svelte-kit dev",
+    "build": "svelte-kit build",
+    "start": "svelte-kit start"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-node": "next",
+    "@sveltejs/kit": "next",
+    "@sveltejs/snowpack-config": "next",
+    "faker": "^5.1.0",
+    "postcss": "^8.1.14",
+    "postcss-load-config": "^3.0.0",
+    "prettier": "^2.2.1",
+    "svelte": "^3.29.0",
+    "typescript": "^4.1.2"
+  },
+  "license": "MIT"
+}
