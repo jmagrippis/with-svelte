@@ -1,1 +1,1 @@
-<footer>Made with 🧡 in London</footer>
+<footer class="container text-center">Made with 🧡 in London</footer>
