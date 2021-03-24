@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
   export let href: string
   export let target: string = undefined
   export let rel: string = undefined
@@ -10,4 +10,5 @@
   {href}
   {target}
   {rel}
-  aria-label={ariaLabel}><slot /></a>
+  aria-label={ariaLabel}><slot /></a
+>
