@@ -1,6 +1,6 @@
 <script>
-  import Header from '$lib/Header.svelte'
-  import Footer from '$lib/Footer.svelte'
+  import Header from '$lib/components/Header.svelte'
+  import Footer from '$lib/components/Footer.svelte'
 </script>
 
 <main class="flex flex-col justify-between min-h-screen">

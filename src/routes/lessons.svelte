@@ -1,5 +1,5 @@
 <script>
-  import PageHeading from '$lib/PageHeading.svelte'
+  import PageHeading from '$lib/components/PageHeading.svelte'
 </script>
 
 <section class="container flex-grow">

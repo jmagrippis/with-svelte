@@ -1,0 +1,11 @@
+overwrite: true
+schema:
+  - ${VITE_CONTENTFUL_ENDPOINT}:
+      headers:
+        Authorization: 'Bearer ${VITE_CONTENTFUL_DELIVERY_TOKEN}'
+documents: 'src/**/*.ts'
+generates:
+  src/lib/generated/graphql.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'

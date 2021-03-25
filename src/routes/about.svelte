@@ -1,6 +1,6 @@
 <script>
-  import PageHeading from '$lib/PageHeading.svelte'
-  import Link from '$lib/Link.svelte'
+  import PageHeading from '$lib/components/PageHeading.svelte'
+  import Link from '$lib/components/Link.svelte'
 </script>
 
 <section class="container flex-grow">
