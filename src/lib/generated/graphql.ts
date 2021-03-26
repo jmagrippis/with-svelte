@@ -133,7 +133,6 @@ export type AssetLinkingCollections = {
   seriesCollection?: Maybe<SeriesCollection>;
   lessonCollection?: Maybe<LessonCollection>;
   personCollection?: Maybe<PersonCollection>;
-  blogPostCollection?: Maybe<BlogPostCollection>;
 };
 
 
@@ -168,14 +167,6 @@ export type AssetLinkingCollectionsPersonCollectionArgs = {
   locale?: Maybe<Scalars['String']>;
 };
 
-
-export type AssetLinkingCollectionsBlogPostCollectionArgs = {
-  skip?: Maybe<Scalars['Int']>;
-  limit?: Maybe<Scalars['Int']>;
-  preview?: Maybe<Scalars['Boolean']>;
-  locale?: Maybe<Scalars['String']>;
-};
-
 export enum AssetOrder {
   UrlAsc = 'url_ASC',
   UrlDesc = 'url_DESC',
@@ -189,164 +180,6 @@ export enum AssetOrder {
   WidthDesc = 'width_DESC',
   HeightAsc = 'height_ASC',
   HeightDesc = 'height_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
-}
-
-/** [See type definition](https://app.contentful.com/spaces/0cavhlc3zk3k/content_types/blogPost) */
-export type BlogPost = Entry & {
-  __typename?: 'BlogPost';
-  sys: Sys;
-  linkedFrom?: Maybe<BlogPostLinkingCollections>;
-  title?: Maybe<Scalars['String']>;
-  slug?: Maybe<Scalars['String']>;
-  heroImage?: Maybe<Asset>;
-  description?: Maybe<Scalars['String']>;
-  body?: Maybe<Scalars['String']>;
-  author?: Maybe<Entry>;
-  publishDate?: Maybe<Scalars['DateTime']>;
-  tags?: Maybe<Array<Maybe<Scalars['String']>>>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/0cavhlc3zk3k/content_types/blogPost) */
-export type BlogPostLinkedFromArgs = {
-  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/0cavhlc3zk3k/content_types/blogPost) */
-export type BlogPostTitleArgs = {
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/0cavhlc3zk3k/content_types/blogPost) */
-export type BlogPostSlugArgs = {
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/0cavhlc3zk3k/content_types/blogPost) */
-export type BlogPostHeroImageArgs = {
-  preview?: Maybe<Scalars['Boolean']>;
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/0cavhlc3zk3k/content_types/blogPost) */
-export type BlogPostDescriptionArgs = {
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/0cavhlc3zk3k/content_types/blogPost) */
-export type BlogPostBodyArgs = {
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/0cavhlc3zk3k/content_types/blogPost) */
-export type BlogPostAuthorArgs = {
-  preview?: Maybe<Scalars['Boolean']>;
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/0cavhlc3zk3k/content_types/blogPost) */
-export type BlogPostPublishDateArgs = {
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/0cavhlc3zk3k/content_types/blogPost) */
-export type BlogPostTagsArgs = {
-  locale?: Maybe<Scalars['String']>;
-};
-
-export type BlogPostCollection = {
-  __typename?: 'BlogPostCollection';
-  total: Scalars['Int'];
-  skip: Scalars['Int'];
-  limit: Scalars['Int'];
-  items: Array<Maybe<BlogPost>>;
-};
-
-export type BlogPostFilter = {
-  sys?: Maybe<SysFilter>;
-  title_exists?: Maybe<Scalars['Boolean']>;
-  title?: Maybe<Scalars['String']>;
-  title_not?: Maybe<Scalars['String']>;
-  title_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  title_contains?: Maybe<Scalars['String']>;
-  title_not_contains?: Maybe<Scalars['String']>;
-  slug_exists?: Maybe<Scalars['Boolean']>;
-  slug?: Maybe<Scalars['String']>;
-  slug_not?: Maybe<Scalars['String']>;
-  slug_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  slug_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  slug_contains?: Maybe<Scalars['String']>;
-  slug_not_contains?: Maybe<Scalars['String']>;
-  heroImage_exists?: Maybe<Scalars['Boolean']>;
-  description_exists?: Maybe<Scalars['Boolean']>;
-  description?: Maybe<Scalars['String']>;
-  description_not?: Maybe<Scalars['String']>;
-  description_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  description_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  description_contains?: Maybe<Scalars['String']>;
-  description_not_contains?: Maybe<Scalars['String']>;
-  body_exists?: Maybe<Scalars['Boolean']>;
-  body?: Maybe<Scalars['String']>;
-  body_not?: Maybe<Scalars['String']>;
-  body_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  body_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  body_contains?: Maybe<Scalars['String']>;
-  body_not_contains?: Maybe<Scalars['String']>;
-  author_exists?: Maybe<Scalars['Boolean']>;
-  publishDate_exists?: Maybe<Scalars['Boolean']>;
-  publishDate?: Maybe<Scalars['DateTime']>;
-  publishDate_not?: Maybe<Scalars['DateTime']>;
-  publishDate_in?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
-  publishDate_not_in?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
-  publishDate_gt?: Maybe<Scalars['DateTime']>;
-  publishDate_gte?: Maybe<Scalars['DateTime']>;
-  publishDate_lt?: Maybe<Scalars['DateTime']>;
-  publishDate_lte?: Maybe<Scalars['DateTime']>;
-  tags_exists?: Maybe<Scalars['Boolean']>;
-  tags_contains_all?: Maybe<Array<Maybe<Scalars['String']>>>;
-  tags_contains_some?: Maybe<Array<Maybe<Scalars['String']>>>;
-  tags_contains_none?: Maybe<Array<Maybe<Scalars['String']>>>;
-  OR?: Maybe<Array<Maybe<BlogPostFilter>>>;
-  AND?: Maybe<Array<Maybe<BlogPostFilter>>>;
-};
-
-export type BlogPostLinkingCollections = {
-  __typename?: 'BlogPostLinkingCollections';
-  entryCollection?: Maybe<EntryCollection>;
-};
-
-
-export type BlogPostLinkingCollectionsEntryCollectionArgs = {
-  skip?: Maybe<Scalars['Int']>;
-  limit?: Maybe<Scalars['Int']>;
-  preview?: Maybe<Scalars['Boolean']>;
-  locale?: Maybe<Scalars['String']>;
-};
-
-export enum BlogPostOrder {
-  TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
-  SlugAsc = 'slug_ASC',
-  SlugDesc = 'slug_DESC',
-  PublishDateAsc = 'publishDate_ASC',
-  PublishDateDesc = 'publishDate_DESC',
   SysIdAsc = 'sys_id_ASC',
   SysIdDesc = 'sys_id_DESC',
   SysPublishedAtAsc = 'sys_publishedAt_ASC',
@@ -848,8 +681,6 @@ export type Query = {
   lessonCollection?: Maybe<LessonCollection>;
   person?: Maybe<Person>;
   personCollection?: Maybe<PersonCollection>;
-  blogPost?: Maybe<BlogPost>;
-  blogPostCollection?: Maybe<BlogPostCollection>;
 };
 
 
@@ -918,23 +749,6 @@ export type QueryPersonCollectionArgs = {
   locale?: Maybe<Scalars['String']>;
   where?: Maybe<PersonFilter>;
   order?: Maybe<Array<Maybe<PersonOrder>>>;
-};
-
-
-export type QueryBlogPostArgs = {
-  id: Scalars['String'];
-  preview?: Maybe<Scalars['Boolean']>;
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-export type QueryBlogPostCollectionArgs = {
-  skip?: Maybe<Scalars['Int']>;
-  limit?: Maybe<Scalars['Int']>;
-  preview?: Maybe<Scalars['Boolean']>;
-  locale?: Maybe<Scalars['String']>;
-  where?: Maybe<BlogPostFilter>;
-  order?: Maybe<Array<Maybe<BlogPostOrder>>>;
 };
 
 /** Groups many lessons together! [See type definition](https://app.contentful.com/spaces/0cavhlc3zk3k/content_types/series) */
@@ -1229,7 +1043,7 @@ export type CoreSeriesFieldsFragment = (
   & Pick<Series, 'title' | 'slug' | 'description'>
   & { heroImage?: Maybe<(
     { __typename?: 'Asset' }
-    & Pick<Asset, 'title' | 'url' | 'width' | 'height'>
+    & Pick<Asset, 'title' | 'width' | 'height' | 'url'>
   )>, lessonsCollection?: Maybe<(
     { __typename?: 'SeriesLessonsCollection' }
     & Pick<SeriesLessonsCollection, 'total'>
