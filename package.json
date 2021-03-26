@@ -9,9 +9,7 @@
   },
   "dependencies": {
     "graphql": "^15.5.0",
-    "graphql-request": "^3.4.0",
-    "remark": "^13.0.0",
-    "remark-html": "^13.0.1"
+    "graphql-request": "^3.4.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.21.3",

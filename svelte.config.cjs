@@ -1,5 +1,6 @@
 const sveltePreprocess = require('svelte-preprocess')
 const vercel = require('@sveltejs/adapter-vercel')
+const pkg = require('./package.json')
 
 /** @type {import('@sveltejs/kit').Config} */
 module.exports = {
@@ -12,7 +13,10 @@ module.exports = {
     // hydrate the <div id="svelte"> element in src/app.html
     target: '#svelte',
 
-    // 🤔 this used to use ssr.noExternal, but then the deps wouldn't compile...
-    vite: {},
+    vite: {
+      ssr: {
+        noExternal: Object.keys(pkg.dependencies || {}),
+      },
+    },
   },
 }

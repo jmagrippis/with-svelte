@@ -1,4 +1,4 @@
-import {GraphQLClient} from 'graphql-request'
+import {GraphQLClient} from 'graphql-request/dist/index.js'
 
 if (
   !import.meta.env.VITE_CONTENTFUL_ENDPOINT ||
