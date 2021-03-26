@@ -7,6 +7,12 @@
     "start": "svelte-kit start",
     "generate": "graphql-codegen -r dotenv-flow/config --config codegen.yml"
   },
+  "dependencies": {
+    "graphql": "^15.5.0",
+    "graphql-request": "^3.4.0",
+    "remark": "^13.0.0",
+    "remark-html": "^13.0.1"
+  },
   "devDependencies": {
     "@graphql-codegen/cli": "1.21.3",
     "@graphql-codegen/introspection": "1.18.1",
@@ -18,18 +24,14 @@
     "autoprefixer": "^10.2.5",
     "dotenv": "^8.2.0",
     "dotenv-flow": "^3.2.0",
-    "graphql": "^15.5.0",
-    "graphql-request": "^3.4.0",
     "postcss": "^8.2.8",
     "prettier": "^2.2.1",
-    "remark": "^13.0.0",
-    "remark-html": "^13.0.1",
-    "svelte": "^3.29.0",
-    "svelte-preprocess": "^4.0.0",
+    "svelte": "^3.35.0",
+    "svelte-preprocess": "^4.6.9",
     "tailwindcss": "^2.0.4",
     "tslib": "^2.1.0",
     "typescript": "^4.2.3",
-    "vite": "^2.1.2"
+    "vite": "^2.1.3"
   },
   "license": "MIT",
   "repository": {
