@@ -13,7 +13,7 @@ const endpoint = import.meta.env.VITE_CONTENTFUL_ENDPOINT as string
 const token = import.meta.env.VITE_CONTENTFUL_DELIVERY_TOKEN
 
 export const contentfulClient = {
-  get: async (query: string) => {
+  async get<QueryResult = object>(query: string): Promise<{data: QueryResult}> {
     try {
       const response = await fetch(`${endpoint}?query=${query}`, {
         headers: {

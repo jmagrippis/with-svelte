@@ -3,7 +3,7 @@ schema:
   - ${VITE_CONTENTFUL_ENDPOINT}:
       headers:
         Authorization: 'Bearer ${VITE_CONTENTFUL_DELIVERY_TOKEN}'
-documents: 'src/**/*.ts'
+documents: 'src/**/*.{ts,graphql}'
 generates:
   src/lib/generated/graphql.ts:
     plugins:

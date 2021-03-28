@@ -1,6 +1,7 @@
 const sveltePreprocess = require('svelte-preprocess')
 const vercel = require('@sveltejs/adapter-vercel')
 const pkg = require('./package.json')
+const plainGraphqlTransformPlugin = require('./plainGraphqlTransformPlugin.cjs')
 
 /** @type {import('@sveltejs/kit').Config} */
 module.exports = {
@@ -17,6 +18,7 @@ module.exports = {
       ssr: {
         noExternal: Object.keys(pkg.dependencies || {}),
       },
+      plugins: [plainGraphqlTransformPlugin()],
     },
   },
 }
