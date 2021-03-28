@@ -1,4 +1,4 @@
-import {gql} from 'graphql-request/dist/index.js'
+import gql from 'graphql-tag'
 
 import type {LatestSeriesQuery} from '$lib/generated/graphql'
 import {contentfulClient} from '../contentfulClient'
