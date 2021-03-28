@@ -8,6 +8,7 @@
     "generate": "graphql-codegen -r dotenv-flow/config --config codegen.yml"
   },
   "dependencies": {
+    "got": "^11.8.2",
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",
     "graphql-tag": "^2.11.0",

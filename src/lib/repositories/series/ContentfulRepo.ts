@@ -1,8 +1,9 @@
-import gql from 'graphql-tag'
-
+import type {LatestSeriesQuery} from '$lib/generated/graphql'
+import {contentfulClient} from '../contentfulClient'
 import type {SeriesRepo} from './Repo'
+import {processMarkdown} from '$lib/processMarkdown'
 
-export const CORE_SERIES_FIELDS = gql`
+export const CORE_SERIES_FIELDS = `
   fragment CoreSeriesFields on Series {
     title
     slug
@@ -27,7 +28,7 @@ export const CORE_SERIES_FIELDS = gql`
   }
 `
 
-const SERIES_QUERY = gql`
+const SERIES_QUERY = `
   ${CORE_SERIES_FIELDS}
   query LatestSeries {
     seriesCollection(order: [latestUpdate_DESC]) {
@@ -39,8 +40,11 @@ const SERIES_QUERY = gql`
 `
 
 export class ContentfulSeriesRepo implements SeriesRepo {
+  #client = contentfulClient
+
   latest = async () => {
-    return []
+    const {data} = await this.#client.get(SERIES_QUERY)
+    return data.seriesCollection.items
   }
 }
 
