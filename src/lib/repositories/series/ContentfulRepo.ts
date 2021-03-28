@@ -1,9 +1,6 @@
 import gql from 'graphql-tag'
 
-import type {LatestSeriesQuery} from '$lib/generated/graphql'
-import {contentfulClient} from '../contentfulClient'
 import type {SeriesRepo} from './Repo'
-import {processMarkdown} from '$lib/processMarkdown'
 
 export const CORE_SERIES_FIELDS = gql`
   fragment CoreSeriesFields on Series {
@@ -42,15 +39,8 @@ const SERIES_QUERY = gql`
 `
 
 export class ContentfulSeriesRepo implements SeriesRepo {
-  #client = contentfulClient
-
   latest = async () => {
-    const data = await this.#client.request<LatestSeriesQuery>(SERIES_QUERY)
-
-    return data.seriesCollection.items.map((item) => ({
-      ...item,
-      description: processMarkdown(item.description),
-    }))
+    return []
   }
 }
 
