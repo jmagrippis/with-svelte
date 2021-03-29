@@ -1,7 +1,6 @@
 import type {LatestSeriesQuery} from '$lib/generated/graphql'
 import {contentfulClient} from '../contentfulClient'
 import type {SeriesRepo} from './Repo'
-import {processMarkdown} from '$lib/processMarkdown'
 import SERIES_QUERY from './latestSeries.graphql'
 
 export class ContentfulSeriesRepo implements SeriesRepo {
