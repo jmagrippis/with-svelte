@@ -1,51 +1,14 @@
-import gql from 'graphql-tag'
-
 import type {LatestSeriesQuery} from '$lib/generated/graphql'
+import {processMarkdown} from '$lib/processMarkdown'
 import {contentfulClient} from '../contentfulClient'
 import type {SeriesRepo} from './Repo'
-import {processMarkdown} from '$lib/processMarkdown'
-
-export const CORE_SERIES_FIELDS = gql`
-  fragment CoreSeriesFields on Series {
-    title
-    slug
-    description
-    heroImage {
-      title
-      width
-      height
-      url(
-        transform: {
-          format: JPG_PROGRESSIVE
-          quality: 90
-          width: 1200
-          height: 720
-          resizeStrategy: THUMB
-        }
-      )
-    }
-    lessonsCollection {
-      total
-    }
-  }
-`
-
-const SERIES_QUERY = gql`
-  ${CORE_SERIES_FIELDS}
-  query LatestSeries {
-    seriesCollection(order: [latestUpdate_DESC]) {
-      items {
-        ...CoreSeriesFields
-      }
-    }
-  }
-`
+import SERIES_QUERY from './latestSeries.graphql'
 
 export class ContentfulSeriesRepo implements SeriesRepo {
   #client = contentfulClient
 
   latest = async () => {
-    const data = await this.#client.request<LatestSeriesQuery>(SERIES_QUERY)
+    const {data} = await this.#client.get<LatestSeriesQuery>(SERIES_QUERY)
 
     return data.seriesCollection.items.map((item) => ({
       ...item,

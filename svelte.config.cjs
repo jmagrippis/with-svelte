@@ -1,5 +1,6 @@
 const sveltePreprocess = require('svelte-preprocess')
 const vercel = require('@sveltejs/adapter-vercel')
+const vitePluginString = require('vite-plugin-string').default
 const pkg = require('./package.json')
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -17,6 +18,14 @@ module.exports = {
       ssr: {
         noExternal: Object.keys(pkg.dependencies || {}),
       },
+      plugins: [
+        vitePluginString({
+          include: ['**/*.graphql'],
+          compress(code) {
+            return code.replace(/\s+/g, ' ')
+          },
+        }),
+      ],
     },
   },
 }

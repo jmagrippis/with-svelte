@@ -1,4 +1,4 @@
-import {GraphQLClient} from 'graphql-request/dist/index.js'
+import fetch from 'node-fetch'
 
 if (
   !import.meta.env.VITE_CONTENTFUL_ENDPOINT ||
@@ -11,8 +11,24 @@ if (
 
 const endpoint = import.meta.env.VITE_CONTENTFUL_ENDPOINT as string
 const token = import.meta.env.VITE_CONTENTFUL_DELIVERY_TOKEN
-export const contentfulClient = new GraphQLClient(endpoint, {
-  headers: {
-    Authorization: `Bearer ${token}`,
+
+export const contentfulClient = {
+  async get<QueryResult = object>(query: string): Promise<{data: QueryResult}> {
+    try {
+      const response = await fetch(`${endpoint}?query=${query}`, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      if (!response || !response.ok) {
+        throw new Error()
+      }
+
+      return response.json()
+    } catch (err) {
+      throw new Error('Could not fetch data from Contentful')
+    }
   },
-})
+}
