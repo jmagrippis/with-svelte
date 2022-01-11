@@ -1,0 +1,47 @@
+/* tailwind setup */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	html {
+		height: 100%;
+	}
+
+	html,
+	body,
+	#theme-container,
+	#app-container {
+		display: flex;
+		flex-direction: column;
+	}
+
+	body,
+	#theme-container,
+	#app-container {
+		flex-grow: 1;
+	}
+
+	#app-container {
+		@apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-primary-50 transition-colors;
+	}
+
+	a {
+		@apply underline decoration-primary-400 decoration-2 transition-colors;
+	}
+
+	a:hover {
+		@apply decoration-primary-600;
+	}
+}
+
+/* css vars */
+* {
+	/* common */
+	--prime-color-hue: 15;
+	--prime-color-saturation: 100%;
+	--prime-color-lightness: 50%;
+
+	--prime-color: var(--prime-color-hue) var(--prime-color-saturation)
+		var(--prime-color-lightness);
+}

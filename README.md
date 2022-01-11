@@ -22,5 +22,5 @@ Try the [official Svelte interactive tutorial]!
 
 Read the [official SvelteKit docs]!
 
-[official svelte tutorial]: https://svelte.dev/tutorial/basics 'Repl-based and awesome'
+[official svelte interactive tutorial]: https://svelte.dev/tutorial/basics 'Repl-based and awesome'
 [official sveltekit docs]: https://kit.svelte.dev/docs 'under heavy development too'

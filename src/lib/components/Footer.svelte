@@ -1,1 +1,3 @@
-<footer class="container text-center">Made with 🧡 in London</footer>
+<footer class="text-center">
+	Made with 🧡 by <a href="https://magrippis.com">jmagrippis</a>
+</footer>

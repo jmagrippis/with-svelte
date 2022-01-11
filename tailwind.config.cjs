@@ -1,21 +1,37 @@
 const colors = require('tailwindcss/colors')
 
+const withOpacityValue =
+	(varName) =>
+	({opacityValue}) =>
+		opacityValue === undefined
+			? `hsl(var(--${varName}))`
+			: `hsla(var(--${varName}) / ${opacityValue})`
+
 module.exports = {
-  purge: ['./src/**/*.svelte'],
-  darkMode: false,
-  theme: {
-    container: {
-      center: true,
-    },
-    colors: {
-      white: colors.white,
-      gray: colors.trueGray,
-      rose: colors.rose,
-      'svelte-prime': '#ff3e00',
-    },
-  },
-  variants: {
-    extend: {},
-  },
-  plugins: [],
+	darkMode: 'class',
+	content: ['./src/**/*.{html,css,svelte}'],
+	theme: {
+		colors: {
+			primary: colors.rose,
+			secondary: colors.emerald,
+			prime: withOpacityValue('prime-color'),
+			gray: colors.stone,
+			white: colors.white,
+			transparent: 'transparent',
+			current: 'currentColor',
+		},
+		fontFamily: {
+			sans: ['Overpass', 'sans-serif'],
+			code: ['Fira Code', 'monospace'],
+		},
+		fontWeight: {
+			thin: 100,
+			normal: 400,
+		},
+		container: {
+			center: true,
+		},
+		extend: {},
+	},
+	plugins: [require('@tailwindcss/typography')],
 }
