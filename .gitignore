@@ -1,11 +1,11 @@
 .DS_Store
 node_modules
-/.svelte
 /build
-/functions
-.vercel_build_output
-
-.env.local
+/.svelte-kit
+/package
+.env
+.env.*
+!.env.example
 
 # debug
 npm-debug.log*

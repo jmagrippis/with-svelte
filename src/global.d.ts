@@ -1,8 +1,7 @@
 /// <reference types="@sveltejs/kit" />
-/// <reference types="svelte" />
-/// <reference types="vite/client" />
 
-declare module '*.graphql' {
-  const content: string
-  export default content
+declare module '*.md' {
+	export const attributes: {title: string; videoUrl: string; date: string}
+
+	export const html: string
 }
