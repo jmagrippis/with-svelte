@@ -3,7 +3,7 @@ import type {RequestHandler} from '@sveltejs/kit'
 import {getThemeFromCookie} from '$lib/getThemeFromCookie'
 import {isTheme} from '$lib/stores/theme'
 
-// GET /theme.json
+// GET /theme
 export const get: RequestHandler = async ({headers}) => {
 	const theme = getThemeFromCookie(headers.cookie)
 
@@ -12,7 +12,7 @@ export const get: RequestHandler = async ({headers}) => {
 	}
 }
 
-// PUT /theme.json
+// PUT /theme
 export const put: RequestHandler = async ({body}) => {
 	const theme = body?.toString()
 

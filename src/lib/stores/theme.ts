@@ -14,14 +14,12 @@ export const isTheme = (theme: string): theme is Theme =>
 export const theme = derived<SessionStore, Theme>(session, ($session, set) => {
 	if ($session.theme) {
 		set($session.theme)
-	} else {
-		if (browser) {
-			set(
-				window.matchMedia('(prefers-color-scheme: dark)').matches
-					? Theme.Dark
-					: Theme.Light
-			)
-		}
+	} else if (browser) {
+		set(
+			window.matchMedia('(prefers-color-scheme: dark)').matches
+				? Theme.Dark
+				: Theme.Light
+		)
 	}
 })
 
@@ -31,5 +29,5 @@ export const setTheme = (theme: Theme): void => {
 		theme,
 	}))
 
-	fetch('/theme.json', {method: 'PUT', body: theme})
+	fetch('/theme', {method: 'PUT', body: theme}).catch()
 }
