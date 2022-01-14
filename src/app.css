@@ -6,6 +6,7 @@
 @layer base {
 	html {
 		height: 100%;
+		-webkit-font-smoothing: antialiased;
 	}
 
 	html,
