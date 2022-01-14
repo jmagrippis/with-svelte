@@ -11,19 +11,17 @@
 
 	html,
 	body,
-	#theme-container,
-	#app-container {
+	#svelte {
 		display: flex;
 		flex-direction: column;
 	}
 
 	body,
-	#theme-container,
-	#app-container {
+	#svelte {
 		flex-grow: 1;
 	}
 
-	#app-container {
+	#svelte {
 		@apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-primary-50 transition-colors;
 	}
 

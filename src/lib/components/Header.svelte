@@ -3,13 +3,6 @@
 	import YouTubeIcon from './YouTubeIcon.svelte'
 	import DarkModeIcon from './DarkModeIcon.svelte'
 	import LightModeIcon from './LightModeIcon.svelte'
-
-	import {setTheme, theme, Theme} from '$lib/stores/theme'
-
-	const onThemeIconClick = () => {
-		const nextTheme = $theme === Theme.Dark ? Theme.Light : Theme.Dark
-		setTheme(nextTheme)
-	}
 </script>
 
 <header
@@ -27,12 +20,9 @@
 		</ul>
 	</nav>
 	<div class="flex items-center gap-4 md:gap-8">
-		<button on:click={onThemeIconClick}>
-			{#if $theme === Theme.Dark}
-				<DarkModeIcon className="w-6" />
-			{:else}
-				<LightModeIcon className="w-6" />
-			{/if}
+		<button>
+			<DarkModeIcon className="w-6 hidden dark:block" />
+			<LightModeIcon className="w-6 dark:hidden" />
 		</button>
 		<a
 			href="https://www.youtube.com/channel/UCm1ALyg61uhPoTnZBm7mY2g"

@@ -24,7 +24,6 @@
 
 <script lang="ts">
 	import PageHeading from '$lib/components/PageHeading.svelte'
-	import Card from '$lib/components/Card.svelte'
 
 	type Lesson = {
 		attributes: {
