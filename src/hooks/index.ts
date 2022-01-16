@@ -1,4 +1,4 @@
-import type {Theme} from '$lib/components/stores/theme'
+import type {Theme} from '$lib/stores/theme'
 import type {GetSession} from '@sveltejs/kit'
 import type {Writable} from 'svelte/store'
 
@@ -14,5 +14,6 @@ export const getSession: GetSession<undefined, undefined, SessionData> = ({
 	const theme = headers.cookie
 		? (getCookieValue(headers.cookie, 'theme') as Theme)
 		: null
+
 	return {theme}
 }

@@ -3,7 +3,7 @@
 
 	import Header from '$lib/components/Header.svelte'
 	import Footer from '$lib/components/Footer.svelte'
-	import {theme} from '$lib/components/stores/theme'
+	import {theme} from '$lib/stores/theme'
 </script>
 
 <div id="theme-container" class={$theme}>

@@ -43,11 +43,11 @@
 <section class="container px-2 md:px-0 flex-grow">
 	<PageHeading>Latest lessons</PageHeading>
 
-	<ul>
+	<ul class="flex flex-col gap-2">
 		{#each lessons as { attributes, href }}
 			<li>
 				<a
-					class="text-2xl md:text-3xl font-thin px-6 py-4 bg-gradient-to-br hover:bg-gradient-to-tl from-prime to-primary-600 no-underline text-white rounded shadow dark:shadow-prime/20"
+					class="block text-2xl md:text-3xl font-thin px-6 py-4 bg-gradient-to-br hover:bg-gradient-to-tl from-prime to-primary-600 no-underline text-white rounded shadow dark:shadow-prime/20"
 					sveltekit:prefetch
 					{href}>{attributes.title}</a
 				>
