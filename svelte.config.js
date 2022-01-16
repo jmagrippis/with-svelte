@@ -2,6 +2,9 @@ import adapter from '@sveltejs/adapter-vercel'
 import preprocess from 'svelte-preprocess'
 import {plugin as md, Mode} from 'vite-plugin-markdown'
 import hljs from 'highlight.js'
+import hljs_svelte from 'highlightjs-svelte'
+
+hljs_svelte(hljs)
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {

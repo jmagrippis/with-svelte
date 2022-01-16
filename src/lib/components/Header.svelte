@@ -3,7 +3,7 @@
 	import YouTubeIcon from './YouTubeIcon.svelte'
 	import DarkModeIcon from './DarkModeIcon.svelte'
 	import LightModeIcon from './LightModeIcon.svelte'
-	import {setTheme, Theme, theme} from './stores/theme'
+	import {setTheme, Theme, theme} from '$lib/stores/theme'
 
 	const handleThemeIconClick = () => {
 		const nextTheme = $theme === Theme.Dark ? Theme.Light : Theme.Dark
