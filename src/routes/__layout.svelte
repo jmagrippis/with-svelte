@@ -3,12 +3,17 @@
 
 	import Header from '$lib/components/Header.svelte'
 	import Footer from '$lib/components/Footer.svelte'
+	import {theme} from '$lib/components/stores/theme'
 </script>
 
-<Header />
+<div id="theme-container" class={$theme}>
+	<div id="app-content">
+		<Header />
 
-<main class="flex-grow flex flex-col items-center justify-center">
-	<slot />
-</main>
+		<main class="flex-grow flex flex-col items-center justify-center">
+			<slot />
+		</main>
 
-<Footer />
+		<Footer />
+	</div>
+</div>

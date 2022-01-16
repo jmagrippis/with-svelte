@@ -11,18 +11,22 @@
 
 	html,
 	body,
-	#svelte {
+	#theme-container,
+	#app-content {
 		display: flex;
 		flex-direction: column;
 	}
 
 	body,
-	#svelte {
+	#theme-container,
+	#app-content {
 		flex-grow: 1;
 	}
 
-	#svelte {
-		@apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-primary-50 transition-colors;
+	#app-content {
+		color: var(--text-color);
+		background-color: var(--background-color);
+		@apply transition-colors;
 	}
 
 	a {
@@ -43,4 +47,30 @@
 
 	--prime-color: var(--prime-color-hue) var(--prime-color-saturation)
 		var(--prime-color-lightness);
+
+	/* light */
+	--text-color-light: hsl(24, 10%, 10%);
+	--text-color-muted-light: hsl(30, 6%, 25%);
+	--background-color-light: hsl(60, 9%, 98%);
+
+	/* dark */
+	--text-color-dark: hsl(356, 100%, 97%);
+	--text-color-muted-dark: hsl(20, 6%, 90%);
+	--background-color-dark: hsl(24, 10%, 10%);
+}
+
+:root {
+	color-scheme: light;
+
+	--text-color: var(--text-color-light);
+	--text-color-muted: var(--text-color-muted-light);
+	--background-color: var(--background-color-light);
+}
+
+.dark {
+	color-scheme: dark;
+
+	--text-color: var(--text-color-dark);
+	--text-color-muted: var(--text-color-muted-dark);
+	--background-color: var(--background-color-dark);
 }
