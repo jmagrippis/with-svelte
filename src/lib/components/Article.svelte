@@ -15,7 +15,8 @@
 
 	<Card>
 		<div class="not-prose text-center">
-			📷 tl;dr? Watch the <a href={videoUrl}>video walkthrough</a>! 📷
+			📷 <strong>Pro-tip</strong>: Watch the
+			<a href={videoUrl}>video walkthrough</a>, come back for reference! 📷
 		</div>
 	</Card>
 

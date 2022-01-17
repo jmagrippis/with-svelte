@@ -5,6 +5,23 @@ import hljs from 'highlight.js'
 import hljs_svelte from 'highlightjs-svelte'
 
 hljs_svelte(hljs)
+const mdPlugin = md({
+	mode: Mode.HTML,
+	markdownIt: {
+		typographer: true,
+		highlight: function (str, lang) {
+			if (lang && hljs.getLanguage(lang)) {
+				try {
+					return hljs.highlight(str, {language: lang}).value
+				} catch {
+					console.log(`error highlighting for ${lang}`)
+				}
+			}
+
+			return '' // use external default escaping
+		},
+	},
+})
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -16,25 +33,7 @@ const config = {
 		adapter: adapter(),
 
 		vite: {
-			plugins: [
-				md({
-					mode: Mode.HTML,
-					markdownIt: {
-						typography: true,
-						highlight: function (str, lang) {
-							if (lang && hljs.getLanguage(lang)) {
-								try {
-									return hljs.highlight(str, {language: lang}).value
-								} catch {
-									console.log(`error highlighting for ${lang}`)
-								}
-							}
-
-							return '' // use external default escaping
-						},
-					},
-				}),
-			],
+			plugins: [mdPlugin],
 		},
 	},
 }
