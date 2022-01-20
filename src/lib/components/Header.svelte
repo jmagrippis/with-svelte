@@ -4,8 +4,8 @@
 	import {setTheme, Theme, theme} from '$lib/stores/theme'
 	import ThemeToggleIcon from './ThemeToggleIcon.svelte'
 
+	$: nextTheme = $theme === Theme.Dark ? Theme.Light : Theme.Dark
 	const handleThemeIconClick = () => {
-		const nextTheme = $theme === Theme.Dark ? Theme.Light : Theme.Dark
 		setTheme(nextTheme)
 	}
 </script>
@@ -28,6 +28,8 @@
 		<button
 			on:click={handleThemeIconClick}
 			class="hover:text-prime transition-colors"
+			label="toggle theme from {$theme} to {nextTheme}"
+			aria-live="polite"
 		>
 			<ThemeToggleIcon className="w-6" />
 		</button>
