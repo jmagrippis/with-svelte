@@ -24,9 +24,7 @@
 	}
 
 	#app-content {
-		color: var(--text-color);
-		background-color: var(--background-color);
-		@apply transition-colors;
+		@apply text-copy-base bg-surface-1 transition-colors;
 	}
 
 	a {
@@ -41,6 +39,8 @@
 /* css vars */
 * {
 	/* common */
+	--transition-duration-short: 0.15s;
+	--transition-duration-long: 0.4s;
 	--prime-color-hue: 15;
 	--prime-color-saturation: 100%;
 	--prime-color-lightness: 50%;
@@ -49,28 +49,47 @@
 		var(--prime-color-lightness);
 
 	/* light */
-	--text-color-light: hsl(24, 10%, 10%);
-	--text-color-muted-light: hsl(30, 6%, 25%);
-	--background-color-light: hsl(60, 9%, 98%);
+	--copy-base-color-light: 24 10% 10%;
+	--copy-muted-color-light: 30 6% 25%;
+	--surface-1-color-light: 60 9% 98%;
 
 	/* dark */
-	--text-color-dark: hsl(356, 100%, 97%);
-	--text-color-muted-dark: hsl(20, 6%, 90%);
-	--background-color-dark: hsl(24, 10%, 10%);
+	--copy-base-color-dark: 356 100% 97%;
+	--copy-muted-color-dark: 20 6% 90%;
+	--surface-1-color-dark: 24 10% 10%;
+
+	/* easings */
+	--ease-1: cubic-bezier(0.25, 0, 0.5, 1);
+	--ease-2: cubic-bezier(0.25, 0, 0.4, 1);
+	--ease-3: cubic-bezier(0.25, 0, 0.3, 1);
+	--ease-4: cubic-bezier(0.25, 0, 0.2, 1);
+	--ease-5: cubic-bezier(0.25, 0, 0.1, 1);
+
+	--ease-out-1: cubic-bezier(0, 0, 0.75, 1);
+	--ease-out-2: cubic-bezier(0, 0, 0.5, 1);
+	--ease-out-3: cubic-bezier(0, 0, 0.3, 1);
+	--ease-out-4: cubic-bezier(0, 0, 0.1, 1);
+	--ease-out-5: cubic-bezier(0, 0, 0, 1);
+
+	--ease-elastic-1: cubic-bezier(0.5, 0.75, 0.75, 1.25);
+	--ease-elastic-2: cubic-bezier(0.5, 1, 0.75, 1.25);
+	--ease-elastic-3: cubic-bezier(0.5, 1.25, 0.75, 1.25);
+	--ease-elastic-4: cubic-bezier(0.5, 1.5, 0.75, 1.25);
+	--ease-elastic-5: cubic-bezier(0.5, 1.75, 0.75, 1.25);
 }
 
 :root {
 	color-scheme: light;
 
-	--text-color: var(--text-color-light);
-	--text-color-muted: var(--text-color-muted-light);
-	--background-color: var(--background-color-light);
+	--copy-base-color: var(--copy-base-color-light);
+	--copy-muted-color: var(--copy-muted-color-light);
+	--surface-1-color: var(--surface-1-color-light);
 }
 
 .dark {
 	color-scheme: dark;
 
-	--text-color: var(--text-color-dark);
-	--text-color-muted: var(--text-color-muted-dark);
-	--background-color: var(--background-color-dark);
+	--copy-base-color: var(--copy-base-color-dark);
+	--copy-muted-color: var(--copy-muted-color-dark);
+	--surface-1-color: var(--surface-1-color-dark);
 }

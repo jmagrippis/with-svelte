@@ -12,7 +12,7 @@
 			<div>Build apps</div>
 			<div class="text-prime font-thin">With Svelte</div>
 		</div>
-		<p class="mb-8">
+		<p class="text-copy-muted mb-8">
 			Turn your ideas into realities using the framework with <a
 				href="https://2020.stateofjs.com/en-US/technologies/front-end-frameworks/"
 				target="_blank"
@@ -31,9 +31,3 @@
 	</div>
 	<aside class="md:col-span-4"><Build className="w-full" /></aside>
 </section>
-
-<style>
-	p {
-		color: var(--text-color-muted);
-	}
-</style>
