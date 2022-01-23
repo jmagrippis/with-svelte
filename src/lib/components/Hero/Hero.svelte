@@ -1,4 +1,5 @@
 <script lang="ts">
+	import BigLink from '../buttons/BigLink.svelte'
 	import Build from './Build.svelte'
 </script>
 
@@ -22,12 +23,7 @@
 				the highest developer satisfaction</a
 			>!
 		</p>
-		<a
-			href="/learn"
-			sveltekit:prefetch
-			class="text-2xl md:text-3xl font-thin px-6 py-4 bg-gradient-to-br hover:bg-gradient-to-tl from-prime to-primary-600 no-underline text-white rounded shadow dark:shadow-prime/20"
-			>Start Learning!</a
-		>
+		<BigLink href="/learn" prefetch={true}>Start Learning!</BigLink>
 	</div>
 	<aside class="md:col-span-4"><Build className="w-full" /></aside>
 </section>

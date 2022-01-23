@@ -1,8 +1,8 @@
 <script>
-	import GithubMark from './GithubMark.svelte'
-	import YouTubeIcon from './YouTubeIcon.svelte'
 	import {setTheme, Theme, theme} from '$lib/stores/theme'
+	import YouTubeIcon from '$lib/components/icons/YouTubeIcon.svelte'
 	import ThemeToggleIcon from './ThemeToggleIcon.svelte'
+	import Profile from './Profile/Profile.svelte'
 
 	$: nextTheme = $theme === Theme.Dark ? Theme.Light : Theme.Dark
 	const handleThemeIconClick = () => {
@@ -33,6 +33,7 @@
 		>
 			<ThemeToggleIcon className="w-6" />
 		</button>
+		<Profile className="hover:text-prime transition-colors w-6" />
 		<a
 			href="https://www.youtube.com/channel/UCm1ALyg61uhPoTnZBm7mY2g"
 			target="_blank"
@@ -41,15 +42,6 @@
 			class="hover:text-prime transition-colors"
 		>
 			<YouTubeIcon title="Johnny's YouTube channel" className="w-6" />
-		</a>
-		<a
-			href="https://github.com/jmagrippis/with-svelte"
-			target="_blank"
-			rel="noopener noreferrer"
-			aria-label="github repo"
-			class="hover:text-prime transition-colors"
-		>
-			<GithubMark className="w-6" />
 		</a>
 	</div>
 </header>

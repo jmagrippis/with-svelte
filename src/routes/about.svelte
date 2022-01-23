@@ -9,7 +9,7 @@
 <section class="container flex-grow">
 	<PageHeading>About</PageHeading>
 
-	<div>
+	<p>
 		We are learning
 		<a href="https://svelte.dev" target="_blank" rel="noopener noreferrer">
 			Svelte
@@ -19,9 +19,9 @@
 			SvelteKit
 		</a>
 		as we’re building this, and so will you!
-	</div>
+	</p>
 
-	<div>
+	<p>
 		Illustrations courtesy of <a
 			href="https://undraw.co"
 			target="_blank"
@@ -29,5 +29,5 @@
 		>
 			unDraw
 		</a>
-	</div>
+	</p>
 </section>

@@ -8,7 +8,9 @@ export type SessionStore = Writable<SessionData>
 const getCookieValue = (cookie: string, name: string): string | null =>
 	cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || null
 
-export const getSession: GetSession<undefined, undefined, SessionData> = ({
+export type Locals = {}
+
+export const getSession: GetSession<Locals, undefined, SessionData> = ({
 	headers,
 }) => {
 	const theme = headers.cookie
