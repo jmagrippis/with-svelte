@@ -24,6 +24,7 @@
 
 <script lang="ts">
 	import PageHeading from '$lib/components/PageHeading.svelte'
+	import BigLink from '$lib/components/buttons/BigLink.svelte'
 
 	type Lesson = {
 		attributes: {
@@ -46,11 +47,7 @@
 	<ul class="flex flex-col gap-2">
 		{#each lessons as { attributes, href }}
 			<li>
-				<a
-					class="block text-2xl md:text-3xl font-thin px-6 py-4 bg-gradient-to-br hover:bg-gradient-to-tl from-prime to-primary-600 no-underline text-white rounded shadow dark:shadow-prime/20"
-					sveltekit:prefetch
-					{href}>{attributes.title}</a
-				>
+				<BigLink prefetch={true} {href}>{attributes.title}</BigLink>
 			</li>
 		{/each}
 	</ul>
