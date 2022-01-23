@@ -1,24 +1,35 @@
 // Import the functions you need from the SDKs you need
+import type {FirebaseApp} from 'firebase/app'
 import {initializeApp} from 'firebase/app'
-import {getAuth, sendSignInLinkToEmail} from 'firebase/auth'
+import {
+	getAuth,
+	isSignInWithEmailLink,
+	signInWithEmailLink,
+} from 'firebase/auth'
 
+console.log('projectId', import.meta.env.VITE_FIREBASE_PROJECT_ID)
 const firebaseConfig = {
 	apiKey: 'AIzaSyB2umUF8t3gNolXOJkV46Lt2hyaFyYS9Yw',
 	authDomain: 'with-svelte.firebaseapp.com',
-	projectId: 'with-svelte',
-	storageBucket: 'with-svelte.appspot.com',
-	messagingSenderId: '648572264622',
-	appId: '1:648572264622:web:5f0b31a2c38b2bc3900d3f',
+	projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
 }
 
-initializeApp(firebaseConfig)
-
-const auth = getAuth()
-
-export const sendMagicLink = (email: string, redirectUrl: string) => {
-	const actionCodeSettings = {
-		url: redirectUrl,
-		handleCodeInApp: true,
+let clientApp: FirebaseApp
+export const getClientApp: () => FirebaseApp = () => {
+	if (!clientApp) {
+		clientApp = initializeApp(firebaseConfig)
 	}
-	return sendSignInLinkToEmail(auth, email, actionCodeSettings)
+	return clientApp
+}
+
+export const isMagicCallbackLink = (link: string) => {
+	const auth = getAuth(getClientApp())
+
+	return isSignInWithEmailLink(auth, link)
+}
+
+export const signInWithMagicLink = (email: string, link: string) => {
+	const auth = getAuth(getClientApp())
+
+	return signInWithEmailLink(auth, email, link)
 }
