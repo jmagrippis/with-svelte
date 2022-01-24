@@ -33,7 +33,7 @@
 		>
 			<ThemeToggleIcon className="w-6" />
 		</button>
-		<Profile className="hover:text-prime transition-colors w-6" />
+		<Profile />
 		<a
 			href="https://www.youtube.com/channel/UCm1ALyg61uhPoTnZBm7mY2g"
 			target="_blank"

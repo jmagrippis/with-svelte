@@ -13,7 +13,7 @@
 			<div>Build apps</div>
 			<div class="text-prime font-thin">With Svelte</div>
 		</div>
-		<p class="text-copy-muted mb-8">
+		<p class="text-copy-muted mb-6">
 			Turn your ideas into realities using the framework with <a
 				href="https://2020.stateofjs.com/en-US/technologies/front-end-frameworks/"
 				target="_blank"
@@ -23,7 +23,9 @@
 				the highest developer satisfaction</a
 			>!
 		</p>
-		<BigLink href="/learn" prefetch={true}>Start Learning!</BigLink>
+		<p class="text-center">
+			<BigLink href="/learn" prefetch={true}>Start Learning!</BigLink>
+		</p>
 	</div>
 	<aside class="md:col-span-4"><Build className="w-full" /></aside>
 </section>

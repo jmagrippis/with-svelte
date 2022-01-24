@@ -1,21 +1,43 @@
+import {getIdTokenFromSessionCookie} from '$lib/firebase/admin'
+import {getCookieValue} from '$lib/getCookieValue'
 import type {Theme} from '$lib/stores/theme'
-import type {GetSession} from '@sveltejs/kit'
+import type {User} from '$lib/stores/user'
+import type {GetSession, Handle} from '@sveltejs/kit'
+import type {DecodedIdToken} from 'firebase-admin/auth'
 import type {Writable} from 'svelte/store'
 
-export type SessionData = {theme: Theme | null}
+export type SessionData = {
+	theme: Theme | null
+	user: User | null
+	magicEmail: string | null
+}
 export type SessionStore = Writable<SessionData>
 
-const getCookieValue = (cookie: string, name: string): string | null =>
-	cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || null
+export type Locals = {
+	theme: Theme | null
+	idToken: DecodedIdToken
+	magicEmail: string | null
+}
 
-export type Locals = {}
+export const handle: Handle = async ({request, resolve}) => {
+	const {cookie} = request.headers
+	request.locals.theme = getCookieValue(cookie, 'theme') as Theme | null
+	request.locals.idToken = await getIdTokenFromSessionCookie(
+		getCookieValue(cookie, 'session')
+	)
+	request.locals.magicEmail = getCookieValue(cookie, 'magicEmail')
+
+	return resolve(request)
+}
 
 export const getSession: GetSession<Locals, undefined, SessionData> = ({
-	headers,
+	locals,
 }) => {
-	const theme = headers.cookie
-		? (getCookieValue(headers.cookie, 'theme') as Theme)
+	const theme = locals.theme
+	const user = locals.idToken
+		? {id: locals.idToken.sub, email: locals.idToken.email}
 		: null
+	const magicEmail = locals.magicEmail
 
-	return {theme}
+	return {theme, user, magicEmail}
 }
