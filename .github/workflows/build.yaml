@@ -1,11 +1,11 @@
-name: Build and Test
+name: Test suite
 
 on:
   pull_request:
     branches: [main]
 
 jobs:
-  ci:
+  test:
     runs-on: ubuntu-latest
 
     strategy:
@@ -14,11 +14,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Build and test on ${{ matrix.node-version }}
+      - name: Test on ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm ci
-      - run: npm run build --if-present
       - run: npm test
