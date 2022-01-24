@@ -1,7 +1,6 @@
-import type {App} from 'firebase-admin/app'
+import {App, cert} from 'firebase-admin/app'
 import {initializeApp, getApps, getApp} from 'firebase-admin/app'
 import {DecodedIdToken, getAuth} from 'firebase-admin/auth'
-import {credential} from 'firebase-admin'
 
 if (
 	!import.meta.env.VITE_FIREBASE_PROJECT_ID ||
@@ -22,7 +21,7 @@ export const getAdminApp = (): App =>
 	getApps().length
 		? getApp()
 		: initializeApp({
-				credential: credential.cert({
+				credential: cert({
 					privateKey,
 					projectId,
 					clientEmail,
