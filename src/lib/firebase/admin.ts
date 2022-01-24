@@ -1,6 +1,6 @@
 import type {App} from 'firebase-admin/app'
-import {initializeApp} from 'firebase-admin/app'
-import {getAuth} from 'firebase-admin/auth'
+import {initializeApp, getApps, getApp} from 'firebase-admin/app'
+import {DecodedIdToken, getAuth} from 'firebase-admin/auth'
 import {credential} from 'firebase-admin'
 
 if (
@@ -11,32 +11,47 @@ if (
 	throw new Error('Firebase Admin environment variables not set')
 }
 
+const projectId = import.meta.env.VITE_FIREBASE_PROJECT_ID
+const clientEmail = import.meta.env.VITE_FIREBASE_ADMIN_CLIENT_EMAIL
 const privateKey = import.meta.env.VITE_FIREBASE_ADMIN_PRIVATE_KEY.replace(
 	/\\n/g,
 	'\n'
 )
-let adminApp: App | null = null
 
-export const getAdminApp = (): App => {
-	if (!adminApp) {
-		adminApp = initializeApp({
-			credential: credential.cert({
-				privateKey,
-				projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-				clientEmail: import.meta.env.VITE_FIREBASE_ADMIN_CLIENT_EMAIL,
-			}),
-		})
-	}
+export const getAdminApp = (): App =>
+	getApps().length
+		? getApp()
+		: initializeApp({
+				credential: credential.cert({
+					privateKey,
+					projectId,
+					clientEmail,
+				}),
+		  })
 
-	return adminApp
+export const createSessionCookie = async (token: string, maxAge: number) => {
+	const expiresIn = maxAge * 1000
+	const auth = getAuth(getAdminApp())
+	const session = await auth.createSessionCookie(token, {
+		expiresIn,
+	})
+
+	return `session=${session}; SameSite=Strict; path=/; HttpOnly; Secure; Max-Age=${maxAge};`
 }
 
-export const generateMagicLink = (email: string, redirectUrl: string) => {
-	const actionCodeSettings = {
-		url: redirectUrl,
-	}
-	return getAuth(getAdminApp()).generateSignInWithEmailLink(
-		email,
-		actionCodeSettings
-	)
+export const verifyIdToken = async (token: string): Promise<DecodedIdToken> => {
+	const auth = getAuth(getAdminApp())
+	return auth.verifyIdToken(token)
+}
+
+export const getIdTokenFromSessionCookie = async (
+	sessionCookie: string | null
+): Promise<DecodedIdToken | null> => {
+	if (!sessionCookie) return null
+
+	const auth = getAuth(getAdminApp())
+
+	return auth.verifySessionCookie(sessionCookie, true).catch(() => {
+		return null
+	})
 }
