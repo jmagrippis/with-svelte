@@ -17,16 +17,15 @@ const privateKey = import.meta.env.VITE_FIREBASE_ADMIN_PRIVATE_KEY.replace(
 	'\n'
 )
 
+const adminConfig = {
+	credential: cert({
+		privateKey,
+		projectId,
+		clientEmail,
+	}),
+}
 export const getAdminApp = (): App =>
-	getApps().length
-		? getApp()
-		: initializeApp({
-				credential: cert({
-					privateKey,
-					projectId,
-					clientEmail,
-				}),
-		  })
+	getApps().length ? getApp() : initializeApp(adminConfig)
 
 export const createSessionCookie = async (token: string, maxAge: number) => {
 	const expiresIn = maxAge * 1000
