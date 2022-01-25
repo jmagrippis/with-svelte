@@ -6,7 +6,7 @@
 <a
 	{href}
 	sveltekit:prefetch={prefetch}
-	class="block relative text-2xl md:text-3xl font-thin px-6 py-4 bg-gradient-to-br hover:bg-gradient-to-tl from-prime to-primary-600 no-underline text-white rounded shadow hover:shadow-lg dark:shadow-prime/20 transition-shadow active:top-[-1px]"
+	class="relative block rounded bg-gradient-to-br from-prime to-primary-600 px-6 py-4 text-2xl font-thin text-white no-underline shadow transition-shadow hover:bg-gradient-to-tl hover:shadow-lg active:top-[-1px] dark:shadow-prime/20 md:text-3xl"
 >
 	<slot />
 </a>

@@ -7,7 +7,7 @@
 </script>
 
 <article
-	class="w-full prose prose-a:decoration-primary-400 prose-code:font-code prose-code:font-light prose-slate sm:prose-lg md:prose-xl lg:prose-2xl dark:prose-invert prose-headings:font-thin"
+	class="prose-code:font-light prose prose-slate w-full prose-headings:font-thin prose-a:decoration-primary-400 prose-code:font-code dark:prose-invert sm:prose-lg md:prose-xl lg:prose-2xl"
 >
 	<h1 class="text-4xl underline decoration-primary-400 decoration-wavy">
 		{title}

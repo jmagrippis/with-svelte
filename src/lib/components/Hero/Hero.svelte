@@ -4,16 +4,16 @@
 </script>
 
 <section
-	class="container py-4 px-2 md:px-0 md:grid md:grid-cols-7 md:gap-x-8 lg:gap-x-16"
+	class="container py-4 px-2 md:grid md:grid-cols-12 md:gap-x-8 md:px-0 lg:gap-x-16"
 >
 	<div
-		class="mb-8 md:mb-0 text-xl md:text-2xl md:col-span-3 text-center md:text-left md:self-center"
+		class="mb-8 text-center text-xl md:col-span-5 md:mb-0 md:self-center md:text-left md:text-2xl"
 	>
-		<div class="text-5xl lg:text-6xl mb-2">
+		<div class="mb-2 text-5xl lg:text-6xl">
 			<div>Build apps</div>
-			<div class="text-prime font-thin">With Svelte</div>
+			<div class="font-thin text-prime">With Svelte</div>
 		</div>
-		<p class="text-copy-muted mb-6">
+		<p class="mb-6 text-copy-muted">
 			Turn your ideas into realities using the framework with <a
 				href="https://2020.stateofjs.com/en-US/technologies/front-end-frameworks/"
 				target="_blank"
@@ -27,5 +27,5 @@
 			<BigLink href="/learn" prefetch={true}>Start Learning!</BigLink>
 		</p>
 	</div>
-	<aside class="md:col-span-4"><Build className="w-full" /></aside>
+	<aside class="md:col-span-7"><Build className="w-full" /></aside>
 </section>

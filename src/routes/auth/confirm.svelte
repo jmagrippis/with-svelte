@@ -60,7 +60,7 @@
 	<title>Confirm Login | With Svelte</title>
 </svelte:head>
 
-<section class="container px-2 md:px-0 flex-grow text-2xl">
+<section class="container flex-grow px-2 text-2xl md:px-0">
 	{#if error}
 		<p>{error}</p>
 	{:else if email}

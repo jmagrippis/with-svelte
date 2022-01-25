@@ -10,7 +10,7 @@
 		target="_blank"
 		rel="noopener noreferrer"
 		aria-label="YouTube"
-		class="hover:text-prime transition-colors"
+		class="transition-colors hover:text-prime"
 	>
 		<YouTubeIcon title="Johnny's YouTube channel" className="w-5" />
 	</a>
@@ -19,7 +19,7 @@
 		target="_blank"
 		rel="noopener noreferrer"
 		aria-label="checkout the source code at the github repo"
-		class="hover:text-prime transition-colors"
+		class="transition-colors hover:text-prime"
 	>
 		<GithubMark className="w-5" />
 	</a>

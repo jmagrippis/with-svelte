@@ -10,7 +10,7 @@
 	<div id="app-content">
 		<Header />
 
-		<main class="flex-grow flex flex-col items-center justify-center">
+		<main class="flex flex-grow flex-col items-center justify-center">
 			<slot />
 		</main>
 

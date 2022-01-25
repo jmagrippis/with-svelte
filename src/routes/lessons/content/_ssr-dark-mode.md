@@ -23,7 +23,7 @@ So, my `__layout.svelte` can look like:
 	<div id="app-content">
 		<Header />
 
-		<main class="flex-grow flex flex-col items-center justify-center">
+		<main class="flex flex-grow flex-col items-center justify-center">
 			<slot />
 		</main>
 
@@ -99,7 +99,7 @@ What **is** important to the theming, is that we can now apply rules like this:
 
 ```css
 #app-content {
-	@apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-primary-50 transition-colors;
+	@apply bg-gray-50 text-gray-900 transition-colors dark:bg-gray-900 dark:text-primary-50;
 }
 ```
 

@@ -11,11 +11,11 @@
 </script>
 
 <header
-	class="container py-4 px-2 md:px-0 flex items-center text-lg text-svelte-prime"
+	class="text-svelte-prime container flex items-center py-4 px-2 text-lg md:px-0"
 >
 	<nav class="flex flex-grow">
-		<a href="/" class="text-2xl font-thin mr-4 md:mr-8">With Svelte</a>
-		<ul class="flex gap-4 md:gap-8 items-center flex-grow mr-4">
+		<a href="/" class="mr-4 text-2xl font-thin md:mr-8">With Svelte</a>
+		<ul class="mr-4 flex flex-grow items-center gap-4 md:gap-8">
 			<li>
 				<a href="/learn">Learn</a>
 			</li>
@@ -27,7 +27,7 @@
 	<div class="flex items-center gap-4 md:gap-8">
 		<button
 			on:click={handleThemeIconClick}
-			class="hover:text-prime transition-colors"
+			class="transition-colors hover:text-prime"
 			label="toggle theme from {$theme} to {nextTheme}"
 			aria-live="polite"
 		>
@@ -39,7 +39,7 @@
 			target="_blank"
 			rel="noopener noreferrer"
 			aria-label="YouTube"
-			class="hover:text-prime transition-colors"
+			class="transition-colors hover:text-prime"
 		>
 			<YouTubeIcon title="Johnny's YouTube channel" className="w-6" />
 		</a>
