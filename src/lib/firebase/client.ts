@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import type {FirebaseApp} from 'firebase/app'
-import {initializeApp} from 'firebase/app'
+import {initializeApp, getApps, getApp} from 'firebase/app'
 import {
 	getAuth,
 	isSignInWithEmailLink,
@@ -15,14 +15,13 @@ const firebaseConfig = {
 	authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
 	projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
 }
-
-let clientApp: FirebaseApp
 export const getClientApp: () => FirebaseApp = () => {
-	if (!clientApp) {
-		clientApp = initializeApp(firebaseConfig)
-		const auth = getAuth(clientApp)
-		setPersistence(auth, inMemoryPersistence)
-	}
+	if (getApps().length) return getApp()
+
+	const clientApp = initializeApp(firebaseConfig)
+	const auth = getAuth(clientApp)
+	setPersistence(auth, inMemoryPersistence)
+
 	return clientApp
 }
 
