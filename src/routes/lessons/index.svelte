@@ -41,7 +41,7 @@
 </svelte:head>
 
 <main>
-	<h1 class="text-4xl underline decoration-primary-400 decoration-wavy mb-8">
+	<h1 class="mb-8 text-4xl underline decoration-primary-400 decoration-wavy">
 		Lessons
 	</h1>
 

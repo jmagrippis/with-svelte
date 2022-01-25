@@ -41,7 +41,7 @@
 	<title>Learn | With Svelte</title>
 </svelte:head>
 
-<section class="container px-2 md:px-0 flex-grow">
+<section class="container flex-grow px-2 md:px-0">
 	<PageHeading>Latest lessons</PageHeading>
 
 	<ul class="flex flex-col gap-2">

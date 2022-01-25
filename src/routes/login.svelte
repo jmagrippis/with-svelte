@@ -48,7 +48,7 @@
 	<title>Login | With Svelte</title>
 </svelte:head>
 
-<section class="container px-2 md:px-0 flex-grow text-2xl">
+<section class="container flex-grow px-2 text-2xl md:px-0">
 	<PageHeading>Login</PageHeading>
 
 	<div class="grid grid-cols-12 gap-6">
@@ -62,11 +62,11 @@
 				</p>
 			</div>
 			<form
-				class="col-span-12 lg:col-span-7 lg:order-1 flex flex-col mt-1 gap-6"
+				class="col-span-12 mt-1 flex flex-col gap-6 lg:order-1 lg:col-span-7"
 				on:submit|preventDefault={handleSubmit}
 			>
 				<input
-					class="w-full shadow p-4 rounded"
+					class="w-full rounded p-4 shadow"
 					name="email"
 					type="email"
 					aria-label="email"

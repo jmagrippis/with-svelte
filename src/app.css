@@ -24,7 +24,7 @@
 	}
 
 	#app-content {
-		@apply text-copy-base bg-surface-1 transition-colors;
+		@apply bg-surface-1 text-copy-base transition-colors;
 	}
 
 	a {

@@ -1,5 +1,5 @@
 <div
-	class="bg-white dark:bg-primary-900 rounded p-6 mb-6 shadow-lg shadow-primary-600/10 dark:shadow-primary-400/10 transition-colors"
+	class="mb-6 rounded bg-white p-6 shadow-lg shadow-primary-600/10 transition-colors dark:bg-primary-900 dark:shadow-primary-400/10"
 >
 	<slot />
 </div>
