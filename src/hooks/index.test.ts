@@ -3,6 +3,8 @@ import {describe, it, expect, vi} from 'vitest'
 
 import {handle, Locals} from '.'
 
+vi.mock('$lib/firebase/admin', () => ({getIdTokenFromSessionCookie: vi.fn()}))
+
 describe('handle', () => {
 	it('puts a `null` theme value in the locals when there are no cookies in the request', () => {
 		const resolve = vi.fn()
