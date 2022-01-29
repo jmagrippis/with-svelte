@@ -1,5 +1,7 @@
 # With Svelte
 
+![CI](https://github.com/jmagrippis/with-svelte/actions/workflows/main.yaml/badge.svg)
+
 Ever wondered how you'd do a blog with [Svelte and SvelteKit]? A CMS? Auth flow? A share CTA? A newsletter?
 
 Wonder no more: This is the resource to show you, how you'd do X with Svelte!
