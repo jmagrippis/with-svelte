@@ -1,15 +1,3 @@
-<script context="module" lang="ts">
-	import type {Load} from '@sveltejs/kit'
-
-	export const load: Load = async ({session}) => {
-		const email = session.magicEmail
-
-		return {
-			props: {email},
-		}
-	}
-</script>
-
 <script lang="ts">
 	import {isMagicLink, signInWithMagicLink} from '$lib/firebase/client'
 	import {onMount} from 'svelte'
@@ -17,42 +5,58 @@
 	import {setUser} from '$lib/stores/user'
 	import BigButton from '$lib/components/buttons/BigButton.svelte'
 	import PageHeading from '$lib/components/PageHeading.svelte'
+	import {clearMagicEmail, getMagicEmail} from '$lib/localStorage/magicEmail'
 
-	export let email: string
-	let error: string | null = null
+	let email: string | null
+
+	type State = 'validating' | 'idle' | 'submitting' | Error
+	let state: State = 'validating'
 
 	const handleSubmit: svelte.JSX.EventHandler<
 		SubmitEvent,
 		HTMLFormElement
 	> = async ({currentTarget}) => {
-		email = new FormData(currentTarget).get('email') as string
-		login()
+		login(new FormData(currentTarget).get('email') as string)
 	}
 
-	const login = async () => {
+	const login = async (magicEmail: string) => {
+		email = magicEmail
+		state = 'submitting'
+
 		const credential = await signInWithMagicLink(email, window.location.href)
 		const token = await credential.user.getIdToken()
 		const user = await fetch('/auth/session', {
 			method: 'POST',
 			headers: {
-				Authorization: `Bearer ${token}`,
+				authorization: `Bearer ${token}`,
 			},
 		}).then((res) => res.json())
 
 		setUser(user)
 
+		clearMagicEmail()
+
 		goto('/')
 	}
 
 	onMount(async () => {
-		const isMagic = isMagicLink(window.location.href)
-		if (!isMagic) {
-			error = 'Invalid magic link: How did you get here?!'
+		if (!isMagicLink(window.location.href)) {
+			state = new Error('Invalid magic link: How did you get here?!')
 			return
 		}
-		if (email) {
-			login()
+
+		const magicEmail = getMagicEmail()
+
+		if (!magicEmail) {
+			state = 'idle'
+			return
 		}
+
+		await login(magicEmail).catch(() => {
+			state = new Error(
+				'We had a problem signing you in... Please try again? 😬'
+			)
+		})
 	})
 </script>
 
@@ -61,10 +65,12 @@
 </svelte:head>
 
 <section class="container flex-grow px-2 text-2xl md:px-0">
-	{#if error}
-		<p>{error}</p>
-	{:else if email}
-		<p>We are signing you in with {email}...</p>
+	{#if state instanceof Error}
+		<p>{state.message}</p>
+	{:else if state === 'validating'}
+		<p>🪄 Validating magic link 🪄</p>
+	{:else if state === 'submitting'}
+		<p>🪄 We are signing you in as {email} 🪄</p>
 	{:else}
 		<PageHeading>Confirm your email to login</PageHeading>
 		<div class="grid grid-cols-12 gap-4">
@@ -74,7 +80,7 @@
 					from a different device to where you requested the login?
 				</p>
 				<p class="mb-4">
-					In any case, please fill in your email address and submit the form!
+					In any case, please fill in your email address and submit this form!
 				</p>
 			</div>
 			<form

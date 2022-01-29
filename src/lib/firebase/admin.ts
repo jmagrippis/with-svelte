@@ -1,5 +1,5 @@
-import {App, cert} from 'firebase-admin/app'
-import {initializeApp, getApps, getApp} from 'firebase-admin/app'
+import type {App} from 'firebase-admin/app'
+import {initializeApp, getApps, getApp, cert} from 'firebase-admin/app'
 import {DecodedIdToken, getAuth} from 'firebase-admin/auth'
 
 if (
@@ -37,19 +37,17 @@ export const createSessionCookie = async (token: string, maxAge: number) => {
 	return `session=${session}; SameSite=Strict; path=/; HttpOnly; Secure; Max-Age=${maxAge};`
 }
 
-export const verifyIdToken = async (token: string): Promise<DecodedIdToken> => {
+export const verifyIdToken = (token: string): Promise<DecodedIdToken> => {
 	const auth = getAuth(getAdminApp())
 	return auth.verifyIdToken(token)
 }
 
-export const getIdTokenFromSessionCookie = async (
+export const getIdTokenFromSessionCookie = (
 	sessionCookie: string | null
 ): Promise<DecodedIdToken | null> => {
 	if (!sessionCookie) return null
 
 	const auth = getAuth(getAdminApp())
 
-	return auth.verifySessionCookie(sessionCookie, true).catch(() => {
-		return null
-	})
+	return auth.verifySessionCookie(sessionCookie, true).catch(() => null)
 }

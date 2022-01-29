@@ -12,15 +12,11 @@
 	import BigButton from '$lib/components/buttons/BigButton.svelte'
 	import PageHeading from '$lib/components/PageHeading.svelte'
 	import {sendMagicLink} from '$lib/firebase/client'
+	import {setMagicEmail} from '$lib/localStorage/magicEmail'
 
-	enum FormState {
-		Idle,
-		Submitting,
-		Success,
-		Error,
-	}
+	type FormState = 'idle' | 'submitting' | 'success' | Error
 
-	let state: FormState = FormState.Idle
+	let state: FormState = 'idle'
 	let email: string | null = null
 
 	const handleSubmit: svelte.JSX.EventHandler<
@@ -28,19 +24,17 @@
 		HTMLFormElement
 	> = async ({currentTarget}) => {
 		email = new FormData(currentTarget).get('email') as string
-		const redirectUrl = new URL(`${window.location.origin}/auth/confirm`)
+		const redirectUrl = `${window.location.origin}/auth/confirm`
 
-		state = FormState.Submitting
+		state = 'submitting'
 
-		await sendMagicLink(email, redirectUrl.toString()).catch(() => {
-			state = FormState.Error
-		})
-		state = FormState.Success
-
-		fetch('/auth/login', {
-			method: 'POST',
-			body: email,
-		})
+		try {
+			await sendMagicLink(email, redirectUrl)
+			setMagicEmail(email)
+			state = 'success'
+		} catch (error) {
+			state = error
+		}
 	}
 </script>
 
@@ -52,7 +46,7 @@
 	<PageHeading>Login</PageHeading>
 
 	<div class="grid grid-cols-12 gap-6">
-		{#if state !== FormState.Success}
+		{#if state !== 'success'}
 			<div class="col-span-12 lg:col-span-5">
 				<p>You are not logged in!</p>
 				<p>
@@ -74,10 +68,10 @@
 					required
 				/>
 				<BigButton>send magic link</BigButton>
-				{#if state === FormState.Submitting}
+				{#if state === 'submitting'}
 					<p>emailing {email}...</p>
 				{/if}
-				{#if state === FormState.Error}
+				{#if state instanceof Error}
 					<p>
 						Whoops, there was an error sending your email... Maybe try again 😬
 					</p>

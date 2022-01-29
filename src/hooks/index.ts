@@ -9,14 +9,12 @@ import type {Writable} from 'svelte/store'
 export type SessionData = {
 	theme: Theme | null
 	user: User | null
-	magicEmail: string | null
 }
 export type SessionStore = Writable<SessionData>
 
 export type Locals = {
 	theme: Theme | null
 	idToken: DecodedIdToken
-	magicEmail: string | null
 }
 
 export const handle: Handle = async ({request, resolve}) => {
@@ -25,7 +23,6 @@ export const handle: Handle = async ({request, resolve}) => {
 	request.locals.idToken = await getIdTokenFromSessionCookie(
 		getCookieValue(cookie, 'session')
 	)
-	request.locals.magicEmail = getCookieValue(cookie, 'magicEmail')
 
 	return resolve(request)
 }
@@ -37,7 +34,6 @@ export const getSession: GetSession<Locals, undefined, SessionData> = ({
 	const user = locals.idToken
 		? {id: locals.idToken.sub, email: locals.idToken.email}
 		: null
-	const magicEmail = locals.magicEmail
 
-	return {theme, user, magicEmail}
+	return {theme, user}
 }
