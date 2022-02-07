@@ -1,13 +1,12 @@
 import {createSessionCookie, verifyIdToken} from '$lib/firebase/admin'
 import type {RequestHandler} from '@sveltejs/kit'
-import type {Locals} from 'src/hooks'
 
 const ONE_WEEK_IN_SECONDS = 7 * 24 * 60 * 60
 
 // POST /auth/session
-export const post: RequestHandler<Locals> = async (request) => {
-	const {authorization = ''} = request.headers
-	const [scheme, token] = authorization.split(' ')
+export const post: RequestHandler = async ({request}) => {
+	const authHeader = request.headers.get('Authorization')
+	const [scheme, token] = authHeader.split(' ')
 	if (scheme !== 'Bearer' || !token) {
 		return {status: 401, body: 'invalid authorization header'}
 	}
@@ -37,7 +36,7 @@ export const post: RequestHandler<Locals> = async (request) => {
 const expiredSessionCookie =
 	'session=; SameSite=Strict; path=/; HttpOnly; Secure; Max-Age=0'
 
-export const del: RequestHandler<Locals> = async () => ({
+export const del: RequestHandler = async () => ({
 	status: 200,
 	headers: {
 		'Set-Cookie': expiredSessionCookie,

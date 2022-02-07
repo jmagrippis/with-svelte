@@ -1,10 +1,9 @@
 import type {RequestHandler} from '@sveltejs/kit'
-
-import {isTheme} from '$lib/stores/theme'
+import {isTheme} from '../types'
 
 // PUT /theme
-export const put: RequestHandler = async ({body}) => {
-	const theme = body.toString()
+export const put: RequestHandler = async ({request}) => {
+	const theme = await request.text()
 
 	if (!isTheme(theme)) {
 		return {
