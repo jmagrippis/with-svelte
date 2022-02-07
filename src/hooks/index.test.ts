@@ -1,62 +1,93 @@
-import type {ServerRequest} from '@sveltejs/kit/types/hooks'
+import type {RequestEvent} from '@sveltejs/kit'
 import {describe, it, expect, vi} from 'vitest'
 
-import {handle, Locals} from '.'
+import {handle} from '.'
 
-vi.mock('$lib/firebase/admin', () => ({getIdTokenFromSessionCookie: vi.fn()}))
+vi.mock('$lib/firebase/admin', () => ({
+	getIdTokenFromSessionCookie: vi.fn(() => Promise.resolve('mock-id-token')),
+}))
 
 describe('handle', () => {
-	it('puts a `null` theme value in the locals when there are no cookies in the request', () => {
+	it('puts a `null` theme value in the locals when there are no cookies in the request', async () => {
 		const resolve = vi.fn()
-		const request = {
-			headers: {},
+		const headers = {
+			get: (property: string) => headers[property] || '',
+		}
+		const event = {
+			request: {
+				headers,
+			},
 			locals: {},
-		} as unknown as ServerRequest<Locals>
+		} as unknown as RequestEvent
 
-		handle({request, resolve})
+		await handle({event, resolve})
 
-		expect(request.locals.theme).toBeNull()
+		expect(event.locals.theme).toBeNull()
 	})
 
-	it('returns the value of the theme cookie', () => {
+	it('returns the value of the theme cookie', async () => {
 		const resolve = vi.fn()
-		const requestA = {
-			headers: {cookie: 'theme=dark'},
+		const headersA = {
+			cookie: 'theme=dark',
+			get: (property: string) => headersA[property] || '',
+		}
+		const eventA = {
+			request: {
+				headers: headersA,
+			},
 			locals: {},
-		} as unknown as ServerRequest<Locals>
+		} as unknown as RequestEvent
 
-		handle({request: requestA, resolve})
+		await handle({event: eventA, resolve})
 
-		expect(requestA.locals.theme).toBe('dark')
+		expect(eventA.locals.theme).toBe('dark')
 
-		const requestB = {
-			headers: {cookie: 'random=value; theme=light; answer=42'},
+		const headersB = {
+			cookie: 'random=value; theme=light; answer=42',
+			get: (property: string) => headersB[property] || '',
+		}
+		const eventB = {
+			request: {
+				headers: headersB,
+			},
 			locals: {},
-		} as unknown as ServerRequest<Locals>
+		} as unknown as RequestEvent
 
-		handle({request: requestB, resolve})
+		await handle({event: eventB, resolve})
 
-		expect(requestB.locals.theme).toBe('light')
+		expect(eventB.locals.theme).toBe('light')
 	})
 
-	it('returns a `null` theme value when there is no theme cookie in the request', () => {
+	it('returns a `null` theme value when there is no theme cookie in the request', async () => {
 		const resolve = vi.fn()
-		const requestA = {
-			headers: {cookie: ''},
+		const headersA = {
+			cookie: '',
+			get: (property: string) => headersA[property] || '',
+		}
+		const eventA = {
+			request: {
+				headers: headersA,
+			},
 			locals: {},
-		} as unknown as ServerRequest<Locals>
+		} as unknown as RequestEvent
 
-		handle({request: requestA, resolve})
+		await handle({event: eventA, resolve})
 
-		expect(requestA.locals.theme).toBeNull()
+		expect(eventA.locals.theme).toBeNull()
 
-		const requestB = {
-			headers: {cookie: 'answer=42'},
+		const headersB = {
+			cookie: 'answer=42',
+			get: (property: string) => headersB[property] || '',
+		}
+		const eventB = {
+			request: {
+				headers: headersB,
+			},
 			locals: {},
-		} as unknown as ServerRequest<Locals>
+		} as unknown as RequestEvent
 
-		handle({request: requestB, resolve})
+		await handle({event: eventB, resolve})
 
-		expect(requestA.locals.theme).toBeNull()
+		expect(eventA.locals.theme).toBeNull()
 	})
 })

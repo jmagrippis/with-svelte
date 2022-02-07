@@ -1,10 +1,11 @@
-<script>
-	import {setTheme, Theme, theme} from '$lib/stores/theme'
+<script lang="ts">
+	import type {Theme} from '../../../types'
+	import {setTheme, theme} from '$lib/stores/theme'
 	import YouTubeIcon from '$lib/components/icons/YouTubeIcon.svelte'
 	import ThemeToggleIcon from './ThemeToggleIcon.svelte'
 	import Profile from './Profile/Profile.svelte'
 
-	$: nextTheme = $theme === Theme.Dark ? Theme.Light : Theme.Dark
+	$: nextTheme = ($theme === 'dark' ? 'light' : 'dark') as Theme
 	const handleThemeIconClick = () => {
 		setTheme(nextTheme)
 	}

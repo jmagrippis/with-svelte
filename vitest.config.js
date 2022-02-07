@@ -1,3 +1,11 @@
 import {extractFromSvelteConfig} from 'vitest-svelte-kit'
 
-export default extractFromSvelteConfig({mockRest: true})
+export default extractFromSvelteConfig({
+	kit: {
+		vite: {
+			test: {
+				mockReset: true,
+			},
+		},
+	},
+})
