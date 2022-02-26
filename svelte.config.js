@@ -32,10 +32,6 @@ const config = {
 	kit: {
 		adapter: adapter(),
 
-		methodOverride: {
-			allowed: ['PUT', 'PATCH', 'DELETE'],
-		},
-
 		vite: {
 			plugins: [mdPlugin],
 		},

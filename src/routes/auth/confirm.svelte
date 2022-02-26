@@ -23,20 +23,24 @@
 		email = magicEmail
 		state = 'submitting'
 
-		const credential = await signInWithMagicLink(email, window.location.href)
-		const token = await credential.user.getIdToken()
-		const user = await fetch('/auth/session', {
-			method: 'POST',
-			headers: {
-				authorization: `Bearer ${token}`,
-			},
-		}).then((res) => res.json())
+		try {
+			const credential = await signInWithMagicLink(email, window.location.href)
+			const token = await credential.user.getIdToken()
+			const user = await fetch('/auth/session', {
+				method: 'POST',
+				headers: {
+					authorization: `Bearer ${token}`,
+				},
+			}).then((res) => res.json())
 
-		setUser(user)
+			setUser(user)
 
-		clearMagicEmail()
+			clearMagicEmail()
 
-		goto('/')
+			goto('/')
+		} catch(error) {
+			state = error
+		}
 	}
 
 	onMount(async () => {
