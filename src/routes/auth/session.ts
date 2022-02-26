@@ -32,13 +32,3 @@ export const post: RequestHandler = async ({request}) => {
 		return {status: 401, body: 'invalid token'}
 	}
 }
-
-const expiredSessionCookie =
-	'session=; SameSite=Strict; path=/; HttpOnly; Secure; Max-Age=0'
-
-export const del: RequestHandler = async () => ({
-	status: 200,
-	headers: {
-		'Set-Cookie': expiredSessionCookie,
-	},
-})
