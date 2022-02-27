@@ -1,3 +1,10 @@
+<script lang="ts" context="module">
+	import type {Load} from '@sveltejs/kit'
+
+	export const load: Load = ({session}) =>
+		session.user ? {redirect: '/profile', status: 302} : {status: 200}
+</script>
+
 <script lang="ts">
 	import BigButton from '$lib/components/buttons/BigButton.svelte'
 	import PageHeading from '$lib/components/PageHeading.svelte'
