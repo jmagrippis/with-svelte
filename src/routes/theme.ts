@@ -14,7 +14,7 @@ export const put: RequestHandler = async ({request}) => {
 
 	return {
 		headers: {
-			'Set-Cookie': `theme=${theme}; SameSite=Strict; HttpOnly; Secure; Path=/`,
+			'Set-Cookie': `theme=${theme}; SameSite=Strict; HttpOnly; Path=/`,
 		},
 	}
 }
@@ -23,6 +23,6 @@ export const put: RequestHandler = async ({request}) => {
 export const del: RequestHandler = async () => ({
 	status: 204,
 	headers: {
-		'Set-Cookie': `theme= ; Max-Age=0; SameSite=Strict; HttpOnly; Secure; Path=/`,
+		'Set-Cookie': `theme= ; Max-Age=0; SameSite=Strict; HttpOnly; Path=/`,
 	},
 })

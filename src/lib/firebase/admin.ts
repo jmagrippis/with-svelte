@@ -34,7 +34,7 @@ export const createSessionCookie = async (token: string, maxAge: number) => {
 		expiresIn,
 	})
 
-	return `session=${session}; SameSite=Strict; Path=/; HttpOnly; Secure; Max-Age=${maxAge};`
+	return `session=${session}; SameSite=Strict; Path=/; HttpOnly; Max-Age=${maxAge};`
 }
 
 export const verifyIdToken = (token: string): Promise<DecodedIdToken> => {

@@ -33,8 +33,7 @@ export const post: RequestHandler = async ({request}) => {
 	}
 }
 
-const expiredCookie =
-	'session=; SameSite=Strict; Path=/; HttpOnly; Secure; Max-Age=0;'
+const expiredCookie = 'session=; SameSite=Strict; Path=/; HttpOnly; Max-Age=0;'
 
 export const del: RequestHandler = () => {
 	return {
