@@ -37,8 +37,8 @@
 
 			clearMagicEmail()
 
-			goto('/')
-		} catch(error) {
+			goto('/profile')
+		} catch (error) {
 			state = error
 		}
 	}
