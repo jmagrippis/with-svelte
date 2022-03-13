@@ -7,6 +7,7 @@
 	html {
 		height: 100%;
 		-webkit-font-smoothing: antialiased;
+		scroll-padding-top: var(--header-height);
 	}
 
 	html,
@@ -84,6 +85,8 @@
 	--copy-base-color: var(--copy-base-color-light);
 	--copy-muted-color: var(--copy-muted-color-light);
 	--surface-1-color: var(--surface-1-color-light);
+
+	--header-height: 4rem;
 }
 
 .dark {
