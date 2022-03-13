@@ -5,14 +5,29 @@
 	import ThemeToggleIcon from './ThemeToggleIcon.svelte'
 	import Profile from './Profile/Profile.svelte'
 
+	let previousY: number
+	let currentY: number
+	let clientHeight: number
+
+	const deriveDirection = (y: number) => {
+		const direction = !previousY || previousY < y ? 'down' : 'up'
+		previousY = y
+
+		return direction
+	}
+
 	$: nextTheme = ($theme === 'dark' ? 'light' : 'dark') as Theme
 	const handleThemeIconClick = () => {
 		setTheme(nextTheme)
 	}
+	$: scrollDirection = deriveDirection(currentY)
+	$: offScreen = scrollDirection === 'down' && currentY > clientHeight * 4
 </script>
 
 <header
-	class="text-svelte-prime container flex items-center py-4 px-2 text-lg md:px-0"
+	class="container sticky top-0 flex h-[var(--header-height)] items-center bg-surface-1/50 px-2 text-lg backdrop-blur-sm transition-transform ease-in md:px-0"
+	class:motion-safe:-translate-y-full={offScreen}
+	bind:clientHeight
 >
 	<nav class="flex flex-grow">
 		<a href="/" class="mr-4 text-2xl font-thin md:mr-8">With Svelte</a>
@@ -46,3 +61,5 @@
 		</a>
 	</div>
 </header>
+
+<svelte:window bind:scrollY={currentY} />
