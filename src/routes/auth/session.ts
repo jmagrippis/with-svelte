@@ -1,7 +1,6 @@
-import {createSessionCookie, verifyIdToken} from '$lib/firebase/admin'
 import type {RequestHandler} from '@sveltejs/kit'
-
-const ONE_WEEK_IN_SECONDS = 7 * 24 * 60 * 60
+import {createSessionCookie, verifyIdToken} from '$lib/firebase/admin'
+import {ONE_WEEK_IN_SECONDS} from '$lib/constants'
 
 // POST /auth/session
 export const post: RequestHandler = async ({request}) => {

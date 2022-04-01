@@ -1,6 +1,7 @@
 import type {App} from 'firebase-admin/app'
+import type {DecodedIdToken} from 'firebase-admin/auth'
 import {initializeApp, getApps, getApp, cert} from 'firebase-admin/app'
-import {DecodedIdToken, getAuth} from 'firebase-admin/auth'
+import {getAuth} from 'firebase-admin/auth'
 
 if (
 	!import.meta.env.VITE_FIREBASE_PROJECT_ID ||
@@ -16,6 +17,7 @@ const privateKey = import.meta.env.VITE_FIREBASE_ADMIN_PRIVATE_KEY.replace(
 	/\\n/g,
 	'\n'
 )
+const apiKey = import.meta.env.VITE_FIREBASE_API_KEY
 
 const adminConfig = {
 	credential: cert({
@@ -35,6 +37,26 @@ export const createSessionCookie = async (token: string, maxAge: number) => {
 	})
 
 	return `session=${session}; SameSite=Strict; Path=/; HttpOnly; Max-Age=${maxAge};`
+}
+
+export const createSessionCookieForUserId = async (
+	userId: string,
+	maxAge: number
+) => {
+	const auth = getAuth(getAdminApp())
+
+	const customToken = await auth.createCustomToken(userId, {})
+	const firebaseIdToken = await fetch(
+		`https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyCustomToken?key=${apiKey}`,
+		{
+			method: 'POST',
+			body: JSON.stringify({token: customToken, returnSecureToken: true}),
+		}
+	)
+		.then((res) => res.json())
+		.then((res) => res.idToken)
+
+	return createSessionCookie(firebaseIdToken, maxAge)
 }
 
 export const verifyIdToken = (token: string): Promise<DecodedIdToken> => {

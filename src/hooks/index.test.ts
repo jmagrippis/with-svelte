@@ -9,7 +9,10 @@ vi.mock('$lib/firebase/admin', () => ({
 
 describe('handle', () => {
 	it('puts a `null` theme value in the locals when there are no cookies in the request', async () => {
-		const resolve = vi.fn()
+		const response = {
+			headers: {get: vi.fn()},
+		}
+		const resolve = vi.fn().mockResolvedValue(response)
 		const headers = {
 			get: (property: string) => headers[property] || '',
 		}
@@ -26,7 +29,10 @@ describe('handle', () => {
 	})
 
 	it('returns the value of the theme cookie', async () => {
-		const resolve = vi.fn()
+		const response = {
+			headers: {get: vi.fn()},
+		}
+		const resolve = vi.fn().mockResolvedValue(response)
 		const headersA = {
 			cookie: 'theme=dark',
 			get: (property: string) => headersA[property] || '',
@@ -59,7 +65,10 @@ describe('handle', () => {
 	})
 
 	it('returns a `null` theme value when there is no theme cookie in the request', async () => {
-		const resolve = vi.fn()
+		const response = {
+			headers: {get: vi.fn()},
+		}
+		const resolve = vi.fn().mockResolvedValue(response)
 		const headersA = {
 			cookie: '',
 			get: (property: string) => headersA[property] || '',
