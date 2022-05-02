@@ -1,3 +1,5 @@
+import {invalidate} from '$app/navigation'
+
 // this action (https://svelte.dev/tutorial/actions) allows us to
 // progressively enhance a <form> that already works without JS
 export function enhanceForm(
@@ -7,47 +9,65 @@ export function enhanceForm(
 		error,
 		result,
 	}: {
-		pending?: (data: FormData, form: HTMLFormElement) => void
-		error?: (
-			res: Response | null,
-			error: Error | null,
+		pending?: ({data, form}: {data: FormData; form: HTMLFormElement}) => void
+		error?: ({
+			data,
+			form,
+			response,
+			error,
+		}: {
+			data: FormData
 			form: HTMLFormElement
-		) => void
-		result: (res: Response, form: HTMLFormElement) => void
-	}
-): {destroy: () => void} {
+			response: Response | null
+			error: Error | null
+		}) => void
+		result?: ({
+			data,
+			form,
+			response,
+		}: {
+			data: FormData
+			response: Response
+			form: HTMLFormElement
+		}) => void
+	} = {}
+) {
 	let current_token: unknown
 
-	async function handle_submit(e: Event) {
+	async function handle_submit(e: SubmitEvent) {
 		const token = (current_token = {})
 
 		e.preventDefault()
 
-		const body = new FormData(form)
+		const data = new FormData(form)
 
-		if (pending) pending(body, form)
+		if (pending) pending({data, form})
 
 		try {
-			const res = await fetch(form.action, {
+			const response = await fetch(form.action, {
 				method: form.method,
 				headers: {
 					accept: 'application/json',
 				},
-				body,
+				body: data,
 			})
 
 			if (token !== current_token) return
 
-			if (res.ok) {
-				result(res, form)
+			if (response.ok) {
+				if (result) result({data, form, response})
+
+				const url = new URL(form.action)
+				url.search = url.hash = ''
+				invalidate(url.href)
 			} else if (error) {
-				error(res, null, form)
+				error({data, form, error: null, response})
 			} else {
-				console.error(await res.text())
+				console.error(await response.text())
 			}
-		} catch (e: any) {
-			if (error) {
-				error(null, e, form)
+		} catch (e: unknown) {
+			if (error && e instanceof Error) {
+				error({data, form, error: e, response: null})
 			} else {
 				throw e
 			}

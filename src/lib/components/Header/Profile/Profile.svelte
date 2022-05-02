@@ -6,7 +6,7 @@
 {#if $user}
 	<a
 		href="/profile"
-		class="flex h-7 w-7 text-sm items-center justify-center border-2 border-dashed rounded-full font-thin no-underline transition-colors hover:border-prime hover:text-primary-600"
+		class="flex h-7 w-7 items-center justify-center rounded-full border-2 border-dashed text-sm font-thin no-underline transition-colors hover:border-prime hover:text-primary-600"
 	>
 		{$user.email[0].toUpperCase()}
 	</a>
