@@ -44,6 +44,9 @@ const config = {
 
 		vite: {
 			plugins: [mdPlugin],
+			test: {
+				mockReset: true,
+			},
 		},
 	},
 }
