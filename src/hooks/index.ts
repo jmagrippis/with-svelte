@@ -10,7 +10,7 @@ import {getCookieValue} from '$lib/getCookieValue'
 import {isTheme} from '../types'
 import type {DecodedIdToken} from 'firebase-admin/auth'
 
-const getThemeFromCookie = (cookie: string) => {
+const getThemeFromCookie = (cookie: string | null) => {
 	const theme = getCookieValue(cookie, 'theme')
 	return isTheme(theme) ? theme : null
 }
@@ -31,7 +31,11 @@ export const handle: Handle = async ({event, resolve}) => {
 
 	const response = await resolve(event)
 
-	if (!response.headers.get('set-cookie') && shouldRefreshToken(token)) {
+	if (
+		!response.headers.get('set-cookie') &&
+		token &&
+		shouldRefreshToken(token)
+	) {
 		const freshSessionCookie = await createSessionCookieForUserId(
 			token.uid,
 			ONE_WEEK_IN_SECONDS
