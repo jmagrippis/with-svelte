@@ -2,22 +2,19 @@ import type {App} from 'firebase-admin/app'
 import type {DecodedIdToken} from 'firebase-admin/auth'
 import {initializeApp, getApps, getApp, cert} from 'firebase-admin/app'
 import {getAuth} from 'firebase-admin/auth'
-
-if (
-	!import.meta.env.VITE_FIREBASE_PROJECT_ID ||
-	!import.meta.env.VITE_FIREBASE_ADMIN_CLIENT_EMAIL ||
-	!import.meta.env.VITE_FIREBASE_ADMIN_PRIVATE_KEY
-) {
-	throw new Error('Firebase Admin environment variables not set')
-}
+import {getServerOnlyEnvVar} from '$lib/getServerOnlyEnvVar'
 
 const projectId = import.meta.env.VITE_FIREBASE_PROJECT_ID
-const clientEmail = import.meta.env.VITE_FIREBASE_ADMIN_CLIENT_EMAIL
-const privateKey = import.meta.env.VITE_FIREBASE_ADMIN_PRIVATE_KEY.replace(
+const clientEmail = getServerOnlyEnvVar('FIREBASE_ADMIN_CLIENT_EMAIL')
+const privateKey = getServerOnlyEnvVar('FIREBASE_ADMIN_PRIVATE_KEY')?.replace(
 	/\\n/g,
 	'\n'
 )
 const apiKey = import.meta.env.VITE_FIREBASE_API_KEY
+
+if (!projectId || !clientEmail || !privateKey || !apiKey) {
+	throw new Error('Firebase Admin environment variables not set')
+}
 
 const adminConfig = {
 	credential: cert({
@@ -64,7 +61,7 @@ export const verifyIdToken = (token: string): Promise<DecodedIdToken> => {
 	return auth.verifyIdToken(token)
 }
 
-export const getIdTokenFromSessionCookie = (
+export const getIdTokenFromSessionCookie = async (
 	sessionCookie: string | null
 ): Promise<DecodedIdToken | null> => {
 	if (!sessionCookie) return null
