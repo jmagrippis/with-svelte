@@ -9,7 +9,7 @@ it('allows the user to type into it', async () => {
 		render(FancyCurrency)
 
 	expect(getByPlaceholderText('£5.00')).toBeInTheDocument()
-	const $input = getByLabelText('How much?')
+	const $input = getByLabelText(/how much/i)
 	expect($input).toBeInTheDocument()
 
 	await user.type($input, '1337')
@@ -40,10 +40,24 @@ it('does not allow the user to type in characters', async () => {
 	const user = userEvent.setup()
 	const {getByLabelText, getByDisplayValue} = render(FancyCurrency)
 
-	const $input = getByLabelText('How much?')
+	const $input = getByLabelText(/how much/i)
 	expect($input).toBeInTheDocument()
 
 	await user.type($input, '42w1`')
 
-	const $updatedInput = getByDisplayValue('421')
+	expect(getByDisplayValue('421')).toBeInTheDocument()
+})
+
+it('has a set of specified amounts to pre-fill', async () => {
+	const user = userEvent.setup()
+	const {getByText, getByDisplayValue} = render(FancyCurrency)
+
+	await user.click(getByText(/more than enough/i))
+	expect(getByDisplayValue('5')).toBeInTheDocument()
+
+	await user.click(getByText(/already too much/i))
+	expect(getByDisplayValue('100')).toBeInTheDocument()
+
+	await user.click(getByText(/Supreme Superfan/i))
+	expect(getByDisplayValue('1337')).toBeInTheDocument()
 })
