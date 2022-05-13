@@ -10,20 +10,26 @@
 </svelte:head>
 
 <section class="container flex-grow px-2 md:px-0">
-	<PageHeading>Fancy Currency Input</PageHeading>
+	<PageHeading>Tips service</PageHeading>
 
-	<p>
-		Welcome to the livestream! We’re building a fancy number input, using Svelte
-		😄
-	</p>
+	<section>
+		<p>Leave a monetary tip, get an array of joke-y, life-advice, tips back!</p>
 
-	<form
-		class="max-w-prose overflow-hidden"
-		method="POST"
-		action="tips"
-		use:enhanceForm
-	>
+		<p>
+			To be clear, this is a page to showcase a fancy, formatted currency input.
+			The tips you’ll get back <strong>will not have any instrisic value</strong
+			>. They will be randomised, but not be unique.
+		</p>
+
+		<p>
+			Besides we haven’t done the Stripe / payment integration yet, or worked
+			out the tipping service, stay tuned for future episodes 😄
+		</p>
+
+		<p>That said...</p>
+	</section>
+	<form class="m-auto max-w-prose" method="POST" action="tips" use:enhanceForm>
 		<FancyCurrency />
-		<BigButton>ship it!</BigButton>
+		<BigButton>tip me!</BigButton>
 	</form>
 </section>
