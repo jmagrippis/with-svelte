@@ -17,7 +17,12 @@
 		😄
 	</p>
 
-	<form class="max-w-prose" method="POST" action="tips" use:enhanceForm>
+	<form
+		class="max-w-prose overflow-hidden"
+		method="POST"
+		action="tips"
+		use:enhanceForm
+	>
 		<FancyCurrency />
 		<BigButton>ship it!</BigButton>
 	</form>
