@@ -46,6 +46,9 @@ const config = {
 			plugins: [mdPlugin],
 			test: {
 				mockReset: true,
+				environment: 'jsdom',
+				globals: true,
+				setupFiles: 'src/setupTests.ts',
 			},
 		},
 	},
