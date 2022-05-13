@@ -4,7 +4,7 @@ import {ONE_WEEK_IN_SECONDS} from '$lib/constants'
 
 // POST /auth/session
 export const post: RequestHandler = async ({request}) => {
-	const authHeader = request.headers.get('Authorization')
+	const authHeader = request.headers.get('Authorization') || ''
 	const [scheme, token] = authHeader.split(' ')
 	if (scheme !== 'Bearer' || !token) {
 		return {status: 401, body: 'invalid authorization header'}
