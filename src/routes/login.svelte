@@ -30,7 +30,12 @@
 			setMagicEmail(email)
 			state = 'success'
 		} catch (error) {
-			state = error
+			if (error instanceof Error) {
+				state = error
+			} else {
+				console.log(error)
+				state = new Error('something went wrong sending the magic link 😞')
+			}
 		}
 	}
 </script>
