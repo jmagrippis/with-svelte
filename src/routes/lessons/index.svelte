@@ -1,27 +1,3 @@
-<script lang="ts" context="module">
-	import type {Load} from '@sveltejs/kit'
-
-	const url = '/lessons.json'
-
-	export const load: Load = async ({fetch}) => {
-		const res = await fetch(url)
-
-		if (res.ok) {
-			const {lessons} = await res.json()
-			return {
-				props: {
-					lessons,
-				},
-			}
-		}
-
-		return {
-			status: res.status,
-			error: new Error(`Could not load ${url}`),
-		}
-	}
-</script>
-
 <script lang="ts">
 	import Card from '$lib/components/Card.svelte'
 
