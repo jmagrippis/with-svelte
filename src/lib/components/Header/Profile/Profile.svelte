@@ -11,7 +11,7 @@
 		{$user.email[0].toUpperCase()}
 	</a>
 {:else}
-	<a href="/login" class="hover:text-prime transition-colors w-6">
+	<a href="/login" class="w-6 transition-colors hover:text-prime">
 		<QuestionMarkIcon className="w-full" />
 	</a>
 {/if}
