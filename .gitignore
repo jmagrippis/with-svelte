@@ -17,5 +17,5 @@ cypress/videos
 cypress/screenshots
 
 # build
-
 .vercel_build_output
+.vercel
