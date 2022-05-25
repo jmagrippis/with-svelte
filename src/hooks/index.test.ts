@@ -13,9 +13,7 @@ describe('handle', () => {
 			headers: {get: vi.fn()},
 		}
 		const resolve = vi.fn().mockResolvedValue(response)
-		const headers = {
-			get: (property: string) => headers[property] || '',
-		}
+		const headers = new Headers({})
 		const event = {
 			request: {
 				headers,
@@ -33,10 +31,7 @@ describe('handle', () => {
 			headers: {get: vi.fn()},
 		}
 		const resolve = vi.fn().mockResolvedValue(response)
-		const headersA = {
-			cookie: 'theme=dark',
-			get: (property: string) => headersA[property] || '',
-		}
+		const headersA = new Headers({cookie: 'theme=dark'})
 		const eventA = {
 			request: {
 				headers: headersA,
@@ -48,10 +43,9 @@ describe('handle', () => {
 
 		expect(eventA.locals.theme).toBe('dark')
 
-		const headersB = {
+		const headersB = new Headers({
 			cookie: 'random=value; theme=light; answer=42',
-			get: (property: string) => headersB[property] || '',
-		}
+		})
 		const eventB = {
 			request: {
 				headers: headersB,
@@ -69,10 +63,7 @@ describe('handle', () => {
 			headers: {get: vi.fn()},
 		}
 		const resolve = vi.fn().mockResolvedValue(response)
-		const headersA = {
-			cookie: '',
-			get: (property: string) => headersA[property] || '',
-		}
+		const headersA = new Headers({cookie: ''})
 		const eventA = {
 			request: {
 				headers: headersA,
@@ -84,10 +75,7 @@ describe('handle', () => {
 
 		expect(eventA.locals.theme).toBeNull()
 
-		const headersB = {
-			cookie: 'answer=42',
-			get: (property: string) => headersB[property] || '',
-		}
+		const headersB = new Headers({cookie: 'answer=42'})
 		const eventB = {
 			request: {
 				headers: headersB,
