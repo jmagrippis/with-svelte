@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {user} from '$lib/stores/user'
-	import QuestionMarkIcon from './QuestionMarkIcon.svelte'
+	import QuestionMarkIcon from '$lib/icons/question-mark.svg'
 </script>
 
 {#if $user}
@@ -12,6 +12,6 @@
 	</a>
 {:else}
 	<a href="/login" class="w-6 transition-colors hover:text-prime">
-		<QuestionMarkIcon className="w-full" />
+		<QuestionMarkIcon class="w-full" />
 	</a>
 {/if}

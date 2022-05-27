@@ -5,6 +5,23 @@ import markdownItAnchor from 'markdown-it-anchor'
 import {plugin as vitePluginMarkdown, Mode} from 'vite-plugin-markdown'
 import hljs from 'highlight.js'
 import hljs_svelte from 'highlightjs-svelte'
+import svg from '@poppanator/sveltekit-svg'
+
+const svgPlugin = svg({
+	svgoOptions: {
+		plugins: [
+			{
+				name: 'preset-default',
+				params: {
+					overrides: {
+						removeViewBox: false,
+					},
+				},
+			},
+			'removeDimensions',
+		],
+	},
+})
 
 const markdownIt = md({
 	typographer: true,
@@ -43,7 +60,7 @@ const config = {
 		},
 
 		vite: {
-			plugins: [mdPlugin],
+			plugins: [svgPlugin, mdPlugin],
 			test: {
 				mockReset: true,
 				environment: 'jsdom',

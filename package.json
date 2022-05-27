@@ -13,6 +13,7 @@
 		"test": "vitest"
 	},
 	"devDependencies": {
+		"@poppanator/sveltekit-svg": "^0.3.2",
 		"@sveltejs/adapter-vercel": "next",
 		"@sveltejs/kit": "next",
 		"@tailwindcss/typography": "^0.5.2",
