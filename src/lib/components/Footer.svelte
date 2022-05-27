@@ -1,10 +1,12 @@
 <script lang="ts">
-	import YouTubeIcon from './icons/YouTubeIcon.svelte'
-	import GithubMark from './icons/GithubMark.svelte'
+	import YouTubeIcon from '$lib/icons/youtube.svg'
+	import GitHubIcon from '$lib/icons/github.svg'
+	import PulsingHeart from './PulsingHeart.svelte'
 </script>
 
 <footer class="flex items-center justify-center gap-2 py-2">
-	Made with 🧡 by <a href="https://magrippis.com">jmagrippis</a>
+	Made with <PulsingHeart /> by
+	<a href="https://magrippis.com">jmagrippis</a>
 	<a
 		href="https://www.youtube.com/channel/UCm1ALyg61uhPoTnZBm7mY2g"
 		target="_blank"
@@ -12,7 +14,7 @@
 		aria-label="YouTube"
 		class="transition-colors hover:text-prime"
 	>
-		<YouTubeIcon title="Johnny's YouTube channel" className="w-5" />
+		<YouTubeIcon title="Johnny's YouTube channel" class="w-5" />
 	</a>
 	<a
 		href="https://github.com/jmagrippis/with-svelte"
@@ -21,6 +23,6 @@
 		aria-label="checkout the source code at the github repo"
 		class="transition-colors hover:text-prime"
 	>
-		<GithubMark className="w-5" />
+		<GitHubIcon class="w-5" />
 	</a>
 </footer>
