@@ -2,7 +2,7 @@ import {lessonsRepo} from '$lib/repos/lessons'
 import type {RequestHandler} from '@sveltejs/kit'
 
 // GET /learn
-export const get: RequestHandler = async () => {
+export const GET: RequestHandler = async () => {
 	const lessons = lessonsRepo.getAll()
 
 	return {

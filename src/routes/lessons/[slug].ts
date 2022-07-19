@@ -2,7 +2,7 @@ import type {RequestHandler} from './__types/[slug]'
 import {lessonsRepo} from '$lib/repos/lessons'
 
 // GET /lessons/:slug
-export const get: RequestHandler = async ({params: {slug}}) => {
+export const GET: RequestHandler = async ({params: {slug}}) => {
 	const lesson = await lessonsRepo.get(slug)
 
 	try {

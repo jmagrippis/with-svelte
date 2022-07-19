@@ -1,7 +1,7 @@
 import type {RequestHandler} from '@sveltejs/kit'
 
 // POST /tips
-export const post: RequestHandler = async () => ({
+export const POST: RequestHandler = async () => ({
 	status: 200,
 	body: {
 		tips: ['It’s better to be active, than radioactive'],
