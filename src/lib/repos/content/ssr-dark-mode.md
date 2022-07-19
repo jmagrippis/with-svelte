@@ -256,7 +256,7 @@ A `PUT` request makes sense for what we wanna do, so let's export a `put` handle
 import type {RequestHandler} from '@sveltejs/kit'
 
 // PUT /theme
-export const put: RequestHandler = async ({body}) => {
+export const PUT: RequestHandler = async ({body}) => {
 	const theme = body.toString()
 
 	return {

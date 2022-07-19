@@ -2,7 +2,7 @@ import type {RequestHandler} from '@sveltejs/kit'
 import {isTheme} from '../types'
 
 // PUT /theme
-export const put: RequestHandler = async ({request}) => {
+export const PUT: RequestHandler = async ({request}) => {
 	const theme = await request.text()
 
 	if (!isTheme(theme)) {
@@ -20,7 +20,7 @@ export const put: RequestHandler = async ({request}) => {
 }
 
 // DELETE /theme
-export const del: RequestHandler = async () => ({
+export const DELETE: RequestHandler = async () => ({
 	status: 204,
 	headers: {
 		'Set-Cookie': `theme= ; Max-Age=0; SameSite=Strict; HttpOnly; Path=/`,
