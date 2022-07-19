@@ -25,7 +25,8 @@ jobs:
           npm --version &&
           npm list -g --depth 0
       - name: install dependencies
-        run: npm ci
+        # have to force until vite-plugin-markdown accepts Vite 3
+        run: npm ci --force
       - name: build
         env:
           VITE_FIREBASE_PROJECT_ID: ${{ secrets.VITE_FIREBASE_PROJECT_ID}}
