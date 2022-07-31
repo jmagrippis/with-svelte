@@ -50,7 +50,7 @@
 			label="toggle theme from {$theme} to {nextTheme}"
 			aria-live="polite"
 		>
-			<ThemeToggleIcon className="w-6" />
+			<ThemeToggleIcon class="w-6" />
 		</button>
 		<Profile />
 		<a
